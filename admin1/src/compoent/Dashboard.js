@@ -15,7 +15,7 @@ function Dashboard() {
                             <Button variant="outline-primary" size='lg'>NewOrder
                             </Button>
                         </Link>
-                        <Link className='text-decoration-none text-dark d-grid gap-2' to="/"  variant="outline-primary">
+                        <Link className='text-decoration-none text-dark d-grid gap-2' to="/venderdetails"  variant="outline-primary">
                             <Button variant="outline-primary" size='lg'>Vendors
                             </Button>
                         </Link>
