@@ -7,7 +7,8 @@ export default function Booking() {
         <div>
             <Navbar expand="lg mx-auto" className='bg-light'>
                 <Container>
-                    <Navbar.Brand to="/Bookingactive">Booking</Navbar.Brand>
+                    <Navbar.Brand to="/Dashboard">Booking</Navbar.Brand>
+                    
                     <Button type="Button" className="btn btn-light  justify-content-end"  >Logout</Button>
 
                 </Container>

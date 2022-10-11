@@ -21,7 +21,7 @@ function Dashboard() {
                         </Link>
                     </Stack>
                     <Stack gap={5} className="col-md-2 m-4">
-                    <Link className='text-decoration-none text-dark d-grid gap-2' to="/Bookingactive"  variant="outline-primary">
+                    <Link className='text-decoration-none text-dark d-grid gap-2' to="/Bookactive"  variant="outline-primary">
                             <Button variant="outline-primary" size='lg'>Bookings
                             </Button>
                         </Link>

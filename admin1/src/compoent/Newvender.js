@@ -1,41 +1,25 @@
 import React, { useState } from 'react'
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Vender from '../Headers/Vender'
 
 
 export default function Newvender() {
-  const [Checked, setChecked] = useState(false);
-  const [vehicles, setvehicles] = useState([{ name: "", phoneno: "", lot: "", addr: "", vehiclename: "", vehicletype: "", licenace: "", reneval: "", perkm: "", driver: "" }])
-
-  const handlechange = (i, e) => {
-    let newVehicles = [...vehicles];
-    newVehicles[i][e.target.name] = e.target.value;
-    setvehicles(newVehicles);
-    
-  };
-
-  const removeFromfield = (i) => {
-    let newVehicles = [...vehicles];
-    newVehicles.splice(i, 1);
-    setvehicles(newVehicles)
-  }
-
-  const addFromfield = () => {
-    setvehicles([...vehicles, { vehiclename: "", vehicletype: "", licenace: "", reneval: "", perkm: "", driver: "" }])
-  }
-
+  const[vender,setvender]=useState([{name: "", phoneno: "", lot: "", addr: "", age: "", Experience: "", Language: ""}])
+ 
   const handlesubmit = (e) => {
     const { name, value } = e.currentTarget;
-    setvehicles((prev) => {
+    setvender((prev) => {
         return { ...prev, [name]: value };
     })
     // console.log(e.target);
 };
-
-  const subimtvedner = (e) => {
-    e.preventdefalt();
-    console.log(vehicles);
-    alert(JSON.stringify(vehicles));
-  }
+const subimtvedner = (e) => {
+  e.preventdefalt();
+  console.log(vender);
+  // alert(JSON.stringify(vehicles));
+}
+  
   return (
     <div>
       <Vender />
@@ -49,7 +33,7 @@ export default function Newvender() {
                 <input
                   type="text"
                   className="form-control "
-                  placeholder="name"
+                  placeholder="Name"
                   name='name'
                   onChange={handlesubmit}
                   required
@@ -60,7 +44,7 @@ export default function Newvender() {
                 <input
                   type="number"
                   className="form-control "
-                  placeholder="mobile number"
+                  placeholder="Mobile number"
                   name='phoneno'
                   onChange={handlesubmit}
                   required
@@ -82,123 +66,70 @@ export default function Newvender() {
                 <input
                   type="text"
                   className="form-control "
-                  placeholder="full address"
+                  placeholder="Full address"
                   name='Addr'
                   onChange={handlesubmit}
                   required
                 />
               </div>
-              <div>
+              <div className="mb-3">
+                <label>Age</label>
+                <input
+                  type="text"
+                  className="form-control "
+                  placeholder="Enter Age"
+                  name='age'
+                  onChange={handlesubmit}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label>Experience</label>
+                <input
+                  type="text"
+                  className="form-control "
+                  placeholder="Enter the Experience"
+                  name='Experience'
+                  onChange={handlesubmit}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label>Language Know</label>
+                <input
+                  type="text"
+                  className="form-control "
+                  placeholder="know Language"
+                  name='Language'
+                  onChange={handlesubmit}
+                  required
+                />
+              </div>
+              {/* <div className="mb-3">
+                <label></label>
+                <input
+                  type="text"
+                  className="form-control "
+                  placeholder="full address"
+                  name='Addr'
+                  onChange={handlesubmit}
+                  required
+                />
+              </div> */}
+              {/* <div>
                 <input type="checkbox"
                   value={Checked}
                   onChange={() => setChecked(!Checked)}
                 />
                 <label>Add vehicle</label>
+              </div> */}
+              <div className='d-flex justify-content-between'>                
+                  <Link className='' to='/addvehicle'><Button >Add vehicle </Button></Link>
+                  <Link className='ms-1rem' to='/addDriver'><Button >Add Driver Detils</Button></Link>                
+
               </div>
 
-              {
-                Checked ?
-                  <div>
-                    {vehicles.map((element, index) => (
-                      <div key={index}>
-                        <div className="mb-3">
-                          <label>Vehicle Name</label>
-                          <input
-                            type="text"
-                            className="form-control "
-                            placeholder="vehicle name"
-                            name='vehiclename'
-                            value={element.vehiclename || ""}
-                            onChange={e => handlechange(index, e)}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label>Vehicle type</label>
-                          <input
-                            type="text"
-                            className="form-control "
-                            placeholder="Vihicle type"
-                            name='vehicletype'
-                            value={element.vehicletype || ""}
-                            onChange={e => handlechange(index, e)}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label>licenace</label>
-                          <input
-                            type="text"
-                            className="form-control "
-                            placeholder="Licenace No"
-                            name='licenace'
-                            value={element.licenace || ""}
-                            onChange={e => handlechange(index, e)}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label>Insurance Reneval Date</label>
-                          <input
-                            type="date"
-                            className="form-control "
-                            placeholder=""
-                            name='reneval'
-                            value={element.reneval || ""}
-                            onChange={e => handlechange(index, e)}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label>fare per KM</label>
-                          <input
-                            type="text"
-                            className="form-control "
-                            placeholder="Enter km"
-                            name='perkm'
-                            value={element.perkm || ""}
-                            onChange={e => handlechange(index, e)}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label>Driver Details</label>
-                          <input
-                            type="text"
-                            className="form-control "
-                            placeholder="Enter Details"
-                            name='driver'
-                            value={element.driver || ""}
-                            onChange={e => handlechange(index, e)}
-                            required
-                          />
-                        </div>
-
-
-
-                        {
-                          index ?
-                            <div className='center'>
-                              <div className='d-flex justify-content-end '>
-                                <button type='button' className=" btn btn-danger  " onClick={() => removeFromfield(index)}>Remove</button>
-                              </div>
-                              <span>-----------------------------------------------------------------------------</span>
-                            </div> : null
-                        }
-                      </div>
-                    ))}
-                  </div>
-                  : null
-              }
-              {
-                Checked ?
-                  <div className='d-flex justify-content-start'>
-                    <button type="button" className="btn btn-primary" onClick={() => addFromfield()}>
-                      Add more
-                    </button>
-                  </div>
-                  : null
-              }
+        
               <div className="d-grid mt-5">
                 <button type="submit" className="btn btn-primary" >
                   Submit
@@ -209,5 +140,6 @@ export default function Newvender() {
         </div>
       </div>
     </div>
-  )
+  );
 }
+

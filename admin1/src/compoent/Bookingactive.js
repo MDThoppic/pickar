@@ -18,7 +18,7 @@ export default function Bookingactive() {
       <div className='d-flex justify-content-end me-5'>
 
         <Button variant="outline-danger" size='lg'>
-          <Link className='text-decoration-none text-dark ' to="/Bookinginactive" variant="outline-primary">In Active book
+          <Link className='text-decoration-none text-dark ' to="/Bookinactive" variant="outline-primary">In Active book
           </Link>
         </Button>
       </div>
