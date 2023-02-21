@@ -1,0 +1,81 @@
+
+
+ANDROID 
+
+WHILE BUILD NEW ANDROID PACKAGE TO RESOLVE DARK MODE 
+STEPS 1:-
+        ADD : 
+            <item name="android:forceDarkAllowed">false</item>
+        iN : styles.xml in resource file like below
+        <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+            <item name="android:textColor">@android:color/black</item>
+            <item name="android:editTextStyle">@style/ResetEditText</item>
+            <item name="colorPrimary">@color/colorPrimary</item>
+            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+            <item name="android:forceDarkAllowed">false</item>
+        </style>
+
+STEPS 2:-
+    RUN: react-native link 
+        To add fonts to native asset folder -> folder/android/app/src/main/assets/fonts/Rubikfonts
+
+
+expo run:android -- To run in connected device
+
+
+## LOTIE ANIMATION FOR ICONS AND LOGOS
+https://www.npmjs.com/package/lottie-react-native
+
+
+##VECTOR BASIC ICONS
+npm install react-native-vector-icons --save
+npm install -g react-native-cli
+
+
+
+##USED TO ANIMATE TEXT,VIEW , IMAGE AND OTHERS
+npm install react-native-animatable --save
+https://www.npmjs.com/package/react-native-animatable
+
+
+TOAST 
+https://github.com/crazycodeboy/react-native-easy-toast
+
+
+## MATERIAL TEXT FIELD FOR INPUT
+https://github.com/n4kz/react-native-material-textfield
+npm install --save react-native-material-textfield
+-- ABOVE NPM IS HAVING ISSUE : https://github.com/n4kz/react-native-material-textfield/issues/249
+SO, FIXED IT BY USING: npm install @ubaids/react-native-material-textfield
+
+
+GRADIANT ICON REF: https://github.com/venishpatidar/react-native-gradient-icon
+
+
+
+DATATIME PICKER MODAL NPM: https://www.npmjs.com/package/react-native-modal-datetime-picker
+
+
+DateTImer formatter NPM: npmjs.com/package/date-and-time
+
+CAROUSEL PLUGIN: https://www.npmjs.com/package/react-native-snap-carousel
+
+## Async-Storage - Used to save login state on launch
+https://react-native-async-storage.github.io/async-storage/docs/install/
+
+
+
+EXPO 45 PROP TYPE ISSUE
+ISSUE : 
+https://stackoverflow.com/questions/67722943/typeerror-undefined-is-not-an-object-evaluating-react-proptypes-array-re
+
+ISSUE 2:
+ViewPropTypes will be removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.
+REPLACE 
+    import PropTypes from 'prop-types';
+WITH
+    import { ViewPropTypes } from 'deprecated-react-native-prop-types';
+IN BELOW FILES
+
+node_modules\@ubaids\react-native-material-textfield\src\components\field\index.js
+node_modules\react-native-check-box\index.js

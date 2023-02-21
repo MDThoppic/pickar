@@ -1,0 +1,8 @@
+List of known pending items
+
+1. OTP authendication using FCM.
+2. Code refactors
+3. Google map API for from & To location.
+4. Driver Bookings
+5. Appstate on launch to get bookings updates
+6. Settings screen changes 
