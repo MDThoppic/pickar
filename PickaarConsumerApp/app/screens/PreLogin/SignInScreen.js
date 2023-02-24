@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, StyleSheet, StatusBar, Text } from 'react-native';
+import { View, StyleSheet, StatusBar, Text, Alert } from 'react-native';
 import { localStorageKeys, themeColors } from '../../utils/constant';
 import * as Animatable from 'react-native-animatable';
 import OTPBlock from './components/otpblock';
@@ -11,7 +11,8 @@ import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 import { firebaseConfig } from '../../../config';
 import firebase from 'firebase/compat/app';
 import { setParam } from '../../store/reducers/userReducer';
-import { storeData } from '../../utils/helpersFn';
+import { getData, storeData } from '../../utils/helpersFn';
+import { setConfig } from '../../store/reducers/modalReducer';
 
 const styles = StyleSheet.create({
     container: {
@@ -29,19 +30,13 @@ export default function SignInScreen(props) {
     const dispatch = useDispatch();
     const [isPhoneNoValidated, setIsPhoneNoValidated] = useState(false);
     let isPhoneNoValidateStatus = useSelector((state) => state.user.isPhoneNoValidateStatus)
-    let isOTPValidateStatus = useSelector((state) => state.user.isOTPValidateStatus)
 
     const phoneNumber = useSelector((state) => state.user.phoneNo);
-    const name=useSelector((state)=>state.user.name);
-    const loginState =useSelector((state)=> state.user.loginState);
-    // const name = useSelector((state) => state.user.name);
+    const name = useSelector((state) => state.user.name);
+    const loginState = useSelector((state) => state.user.loginState);
+    const profileStatus = useSelector((state) => state.user.profileStatus);
 
-    // const [code, setCode] = useState('');
-    // const [verificationId, setVerificationId] = useState('');
-    // const recaptchaVerifier = useRef(null);
-    // const ValidateOTP = (code) => {
-    //     console.log(code)
-    // }
+    let sqlPhoneNo;
 
     /**
      * @description Triggered once PhoneNumber entered
@@ -52,25 +47,65 @@ export default function SignInScreen(props) {
             checkingData();
         }
     }, [isPhoneNoValidateStatus])
-     
-    useEffect(()=>{
-        if(loginState){
+
+    useEffect(() => {
+        if (loginState) {
             dispatch({
                 type: CALL_SAGA.REQUEST_CREATE_NEW_ACCOUNT,
                 serviceId: 101,
                 deviceId: '987-23423-234-234-234',
                 phoneNo: phoneNumber,
-                name:name,
+                name: name,
                 serviceName: 'vendor'
             });
         }
 
-    },[loginState])
+    }, [loginState])
 
+    // useEffect(() => {
+    //     // await storeData(localStorageKeys.profileStatus, profileStatus).then(value => { }).catch(e => { })
+
+    //     //get sqlLite to get details to store the phoneNo
+    //     getData(localStorageKeys.uniquePhoneNo).then(value => {
+    //         sqlPhoneNo = value;
+    //     })
+    //     if (profileStatus == true) {
+    //         console.log("profilestatus true");
+    //         navigation.navigate('dashboard');
+
+    //     } else {
+    //         // console.log("profilestatus false");
+    //         console.log(sqlPhoneNo)
+    //         numberChecking();
+    //         // alert("on this Done.Let will access the vendor application.To more info content (Number)")
+
+    //     }
+
+    // }, [])
+
+    useEffect (()=>{
+        //get sqlLite to get details to store the phoneNo
+        let phoneNumber;
+        getData(localStorageKeys.uniquePhoneNo).then(value => {
+            phoneNumber = value;
+        console.log("number define",phoneNumber)
+        sqlPhoneNo=phoneNumber;
+        //alert is the already register the vendor
+        if(phoneNumber){
+            Alert.alert(
+                "Info",
+                    "ones is Done. Let will access the vendor appplication. To more INFO  Content above Number : 9159139370",
+
+            )
+        }
+        })
+        // console.log("number define",sqlPhoneNo)
+
+    },[])
 
     const checkingData = async () => {
         console.log("INSIDE")
-        console.log("values",phoneNumber,name);
+        console.log("values", phoneNumber, name);
         await dispatch(setParam({ key: "phoneNo", value: phoneNumber }));
         await dispatch(setParam({ key: "name", value: name }));
         await dispatch(setParam({ key: "loginState", value: true }));
@@ -84,47 +119,11 @@ export default function SignInScreen(props) {
         //     serviceName: 'vendor'
         // });
         // props.navigation.navigate('dashboard', { screen: 'home' });
-        props.navigation.navigate('Signpopup');
-
     }
 
-    // const sendVerification = () => {
-    //     const phoneProvider = new firebase.auth.PhoneAuthProvider();
-    //     console.log('+91' + phoneNumber)
-    //     phoneProvider
-    //         .verifyPhoneNumber('+91' + phoneNumber, recaptchaVerifier.current)
-    //         .then(setVerificationId);
-    // }
-
-    // const confirmCode = (otp) => {
-    //     const _OTP = otp;
-    //     const credential = firebase.auth.PhoneAuthProvider.credential(
-    //         verificationId,
-    //         _OTP
-    //     );
-    //     firebase.auth().signInWithCredential(credential)
-    //         JSON.stringify(sendVerification)
-    //         .then(async () => {
-    //             setCode('');
-    //             console.log("INSIDE")
-    //             await dispatch(setParam({ key: "phoneNo", value: phoneNumber }));
-    //             await dispatch(setParam({ key: "loginState", value: true }));
-    //             await storeData(localStorageKeys.loginStatus, 'Y').then(value => { }).catch(e => { })
-    //             await storeData(localStorageKeys.uniquePhoneNo, phoneNumber).then(value => { }).catch(e => { })
-    //             props.navigation.navigate('dashboard', { screen: 'home' });
-    //         })
-    //         .catch((error) => {
-    //             /* ReWrite   
-    //             Mega
-    //             */
-    //             console.log(error)
-    //         })
-    // }
-
-
     /**
-     * @description App launch handshake on load
-     */
+  * @description App launch handshake on load
+  */
     // useEffect(() => {
     //     dispatch({
     //         type: CALL_SAGA.REQUEST_HANDSHAKE,
@@ -133,6 +132,8 @@ export default function SignInScreen(props) {
     //         deviceID: '2354234-2345-2345-234'
     //     })
     // }, [dispatch]);
+
+
     return (
 
         <View style={[styles.container, !isPhoneNoValidated ? { flex: 1.7 } : { flex: 2.2 }]}>
@@ -145,23 +146,7 @@ export default function SignInScreen(props) {
                     style={styles.image}
                 ></Animatable.Image>
             </View>
-
-            {/* <FirebaseRecaptchaVerifierModal
-                ref={recaptchaVerifier}
-                firebaseConfig={firebaseConfig}
-            /> */}
-
-            <View >
-
-            </View>
             <PhoneNoBlock />
-            {/* {
-                !isPhoneNoValidated
-                    ? <PhoneNoBlock />
-                    : <OTPBlock
-                        ValidateOTP={confirmCode}
-                    />
-            } */}
         </View>
 
     )

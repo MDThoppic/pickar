@@ -1,32 +1,51 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import Booking from '../Headers/Booking'
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 export default function Bookingactive() {
 
+  const [detail, setdetails] = useState([]);
+  const getBookingurl = "http://localhost:3001/booking"
 
+  useEffect(() => {
+    setTimeout(() => {
+      getBooking()
+    }, 3000);
+  }, []);
+
+  const getBooking = async () => {
+    const data = await axios.get(getBookingurl)
+      .then(res => {
+        console.log(res.data);
+        setdetails(res.data);
+      }).catch(err => {
+        console.log(err);
+      })
+  }
 
   return (
     <div>
       <Booking />
       <div>
-        <h5 className=' d-flex mt-3 justify-content-center uppercase'>Active Booking</h5>
+        <h5 className=' d-flex mt-3 justify-content-center uppercase text-white'>Active Booking</h5>
 
       </div>
       <div className='d-flex justify-content-end me-5'>
 
         <Button variant="outline-danger" size='lg'>
-          <Link className='text-decoration-none text-dark ' to="/Bookinactive" variant="outline-primary">In Active book
+          <Link className='text-decoration-none text-white ' to="/Bookinginactive" variant="outline-primary">In Active book
           </Link>
         </Button>
       </div>
       <div className='continer m-5'>
 
-        <Table striped className=''>
+        <Table striped className='text-white'>
           <thead>
             <tr>
+              <td>Sr.no</td>
               <th>Booking ID</th>
               <th>Start Time</th>
               <th>Pickup</th>
@@ -37,54 +56,25 @@ export default function Bookingactive() {
               <th>Pickup Type</th>
             </tr>
           </thead>
-          <tbody>
-            <tr className=''>
-
-              <td>1</td>
-              <td>6:00 am</td>
-              <td>vellore</td>
-              <td>chennai</td>
-              <td>one way</td>
-              <td>
-                name
-                9159139370
-              </td>
-              <td>name
-                9159139370</td>
-              <td> overcall</td>
-            </tr>
-            <tr>
-
-              <td>2</td>
-              <td>6:00 am</td>
-              <td>chennai</td>
-              <td>vellore</td>
-              <td>one way</td>
-              <td>
-                name
-                9159139370
-              </td>
-              <td>name
-                9159139370</td>
-              <td>app </td>
-            </tr>
-            <tr>
-
-              <td>2</td>
-              <td>6:00 am</td>
-              <td>chennai</td>
-              <td>vellore</td>
-              <td>Round</td>
-              <td>
-                name
-                9159139370
-              </td>
-              <td>name
-                9159139370</td>
-              <td>app </td>
-            </tr>
-
-          </tbody>
+          {
+            detail.map((arr, id, i) => {
+              return <>
+              <tbody>
+                <tr key={i}>
+                  <td>{i++}</td>
+                  <td>{arr.id}</td>
+                  <td>{arr.booking.date}<br />{arr.booking.time}</td>
+                    <td>{arr.booking.from}</td>
+                    <td>{arr.booking.to}</td>
+                    <td>{arr.radiovalue}</td>
+                    <td>{arr.booking.name}<br />
+                      ({arr.booking.phoneno})</td>
+                    
+                </tr>
+              </tbody>
+              </>
+            })
+          }
         </Table>
       </div>
     </div>

@@ -1,24 +1,25 @@
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SignInScreen from '../screens/PreLogin/SignInScreen';
-import FeedbackComponent from '../screens/ActiveBooking/StepTwo/Feedback';
-import ActiveBookingStackNavScreens from './activeBookingNav';
-import BookingStackNavScreens from './bookingNav';
+// import SignInScreen from '../screens/PreLogin/SignInScreen';
 import MainTab from './MainTabNav';
-import TravelStackNavScreens from './travelBooking';
-import { getData } from '../utils/helpersFn';
-import { localStorageKeys } from '../utils/constant';
-import { SplashScreen } from '../screens/PreLogin/splashScreen';
-import SettingScreenNav from './settingsNav';
-import Signinpopup from '../screens/Dashboard/components/Signinpopup';
+// import { SplashScreen } from '../screens/PreLogin/splashScreen';
+// import Signinpopup from '../screens/Dashboard/components/Signinpopup';
+
+// import FeedbackComponent from '../screens/ActiveBooking/StepTwo/Feedback';
+// import ActiveBookingStackNavScreens from './activeBookingNav';
+// import BookingStackNavScreens from './bookingNav';
+// import TravelStackNavScreens from './travelBooking';
+// import { getData } from '../utils/helpersFn';
+// import { localStorageKeys } from '../utils/constant';
+// import SettingScreenNav from './settingsNav';
 const RootStack = createNativeStackNavigator();
 
 const RootStackNavScreens = () => {
 
     return (
-        <RootStack.Navigator initialRouteName='splashScreen'>
+        <RootStack.Navigator initialRouteName='dashboard'>
 
-            <RootStack.Screen
+            {/* <RootStack.Screen
                 name="splashScreen"
                 component={SplashScreen}
                 options={{
@@ -31,7 +32,7 @@ const RootStackNavScreens = () => {
                 options={{
                     headerShown: false,
                 }}
-            />
+            /> */}
 
             <RootStack.Screen
                 name="dashboard"
@@ -41,13 +42,13 @@ const RootStackNavScreens = () => {
                     cardStyle: { backgroundColor: '#fff' }
                 }} />
 
-            <RootStack.Screen
+            {/* <RootStack.Screen
                 name="Signpopup"
                 component={Signinpopup}
                 options={{
                     headerShown: false,
                     cardStyle: { backgroundColor: '#fff' }
-                }} />
+                }} /> */}
             {/*
                 <RootStack.Screen
                 name="booking"

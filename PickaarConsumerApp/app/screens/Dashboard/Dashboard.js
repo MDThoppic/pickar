@@ -1,94 +1,108 @@
 import { useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, StatusBar, Text } from "react-native";
-import { LineWithTxt } from '../../components/brick/hr';
-import PIcon, { PIcons } from '../../components/brick/Icon';
-import DashboardHeader from './components/dashboardHeader';
+import { View, StyleSheet, TouchableOpacity, StatusBar, Text, Alert } from "react-native";
 import { localStorageKeys, themeColors } from '../../utils/constant';
 import { fonts } from '../../utils/theme';
-import CALL_SAGA from '../../store/sagas/types/types';
 import { useDispatch, useSelector } from 'react-redux';
-import { OfferBanners } from '../../components/rooms/offerBanners';
 import { getData, storeData } from '../../utils/helpersFn';
-import { ModalComponent } from '../../components/brick/modal';
+import ActiveBook from '../ActiveBooking/StepOne/ActionBook';
 
-const BookNow = (props) => {
+// import { value } from 'deprecated-react-native-prop-types/DeprecatedTextInputPropTypes';
 
-    const gotoBookNow = () => {
-        props.navigation.navigate('booking', { screen: 'StepOne' })
-    }
+// const BookNow = (props) => {
 
-    return (
-        <View style={styles.titleBlock}>
-            <View style={{ width: '85%' }}>
-                <View style={{ flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <View>
-                        <Text style={[styles.mainTitle, { color: themeColors.primary }]}>Book confortable     </Text>
-                    </View>
-                    <View>
-                        <Text style={[styles.mainTitle, { color: themeColors.yellow }]}>rides in affordable price  </Text>
-                    </View>
-                </View>
-            </View>
-            <View style={{ width: '15%', flexDirection: 'row', justifyContent: 'flex-end' }}>
-                <TouchableOpacity onPress={gotoBookNow}>
-                    <PIcon type={PIcons.Feather} gradient={false} color={themeColors.primary} name="arrow-right" size={45}></PIcon>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
+//     const gotoBookNow = () => {
+//         props.navigation.navigate('booking', { screen: 'StepOne' })
+//     }
 
-export default function Dashboard(props) {
-    const dispatch = useDispatch();
+//     return (
+//         <View style={styles.titleBlock}>
+//             <View style={{ width: '85%' }}>
+//                 <View style={{ flexDirection: 'column', justifyContent: 'space-between' }}>
+//                     <View>
+//                         <Text style={[styles.mainTitle, { color: themeColors.primary }]}>Book confortable     </Text>
+//                     </View>
+//                     <View>
+//                         <Text style={[styles.mainTitle, { color: themeColors.yellow }]}>rides in affordable price  </Text>
+//                     </View>
+//                 </View>
+//             </View>
+//             <View style={{ width: '15%', flexDirection: 'row', justifyContent: 'flex-end' }}>
+//                 <TouchableOpacity onPress={gotoBookNow}>
+//                     <PIcon type={PIcons.Feather} gradient={false} color={themeColors.primary} name="arrow-right" size={45}></PIcon>
+//                 </TouchableOpacity>
+//             </View>
+//         </View>
+//     )
+// }
 
-    const profileStatus = useSelector((state) => state.user.profileStatus)
+export default function Dashboard() {
+    // const dispatch = useDispatch();
+
+    const locations = 0;
+
     useEffect(() => {
-        console.log("DASHBOARD")
-        storeData(localStorageKeys.loginStatus, 'Y').then(Data => {
-            console.log("SUCCESS" + Data)
+        let serviceLoc;
+        getData(localStorageKeys.serviceLoc).then(value => {
+            serviceLoc = value;
+            // if(serviceLoc.length)
+            // console.log("serviceLoc", serviceLoc)
+            console.log(serviceLoc)
+
         }).catch(e => {
-            console.log("ERROR" + e)
+            console.log(e)
         })
-        const dashboardOnLoad = async () => {
-            dispatch({
-                type: CALL_SAGA.REQUEST_DASHBOARD_ON_LOAD,
-                serviceId: 103,
-                serviceName: 'DashboardOnLoad',
-                deviceID: '2354234-2345-2345-234'
-            })
-        }
-        dashboardOnLoad();
-    }, [dispatch])
+        console.log(serviceLoc)
+
+    }, [])
+
+    // const locationstaus = () => {
+    //     if (locations <= 2) {
+    //         Alert.alert(
+    //             "Info",
+    //             "We need you to create district list to available there service ", "steps:-  Setting--> your service location",
+    //             [
+    //                 {
+    //                     text: "OK",
+    //                     onPress: () => {
+    //                         navigation.navigate('dashboard', { screen: 'Active' })
+    //                     }
+    //                 }
+    //             ]
+
+    //         )
+    //     }
+    // }
+
+
+
 
     return (
         <>
-            {
-                
-                profileStatus==true ?
-
-                <View style={styles.container}>
-                    <StatusBar backgroundColor={themeColors.white} barStyle="dark-content" />
-                    <View style={{ height: 40 }}>
-                        {/* <DashboardHeader /> */}
-                    </View>
-
-                    {/* TITLE NAVIGATE TO BOOKING PAGE */}
-                    <BookNow navigation={props.navigation} />
 
 
-                    <OfferBanners navigation={props.navigation} />
-                    {/* <Line /> */}
-
-                    <LineWithTxt txt={'Tours'} />
-
-                    <ModalComponent />
-
+            <View style={styles.container}>
+                <StatusBar backgroundColor={themeColors.white} barStyle="dark-content" />
+                <View style={{ height: 40,elevation: 6, }}>
+                    {/* Header component work */}
                 </View>
-                :
-                <>
-                    
-                </>
-        }
+                <View>
+                    <Text style={{ fontSize: 25, fontFamily: fonts.RubikMedium }}>Dashboard</Text>
+                </View>
+                <View style={{
+                    borderBottomWidth: 0, shadowOffset: 1, backgroundColor: 'white', height: 30, shadowColor: "#000",
+                    // shadowOpacity: 0.27,
+                    // shadowRadius: 4.65,
+                    elevation: 6,
+                }} >
+                    <Text>welcome</Text>
+                </View>
+                <View>
+                    <ActiveBook />
+                </View>
+
+
+            </View>
+
         </>
     )
 }

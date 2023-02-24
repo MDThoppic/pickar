@@ -19,13 +19,14 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'flex-end',
         alignItems: 'flex-start',
-        borderTopLeftRadius: 100,
-        borderBottomStartRadius: 100,
-        borderBottomEndRadius: 100,
-        borderTopRightRadius: 100,
+        borderTopLeftRadius: 80,
+        borderBottomStartRadius: 90,
+        borderBottomEndRadius: 90,
+        borderTopRightRadius: 80,
         backgroundColor: themeColors.yellow,
         paddingHorizontal: 30,
-        paddingVertical: 40
+        paddingVertical: 40,
+        marginLeft:5
     },
     title: {
         fontSize: 22,
@@ -79,7 +80,7 @@ const PhoneNoBlock = () => {
                     duraton="3500"
                     style={[styles.container, { flex: 1.9 }]}>
 
-                    <View style={{ flex: 1, }}>
+                    <View style={{ flex: 1, marginStart:40}}>
                         <Text fontFamily={fonts.RubikMedium} style={styles.title}>
                             Welcome to Pickaar !
                         </Text>

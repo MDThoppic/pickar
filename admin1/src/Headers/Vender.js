@@ -7,9 +7,9 @@ export default function Vender() {
     return (
         <div>
             
-            <Navbar expand="lg mx-auto" className='bg-light'>
+            <Navbar expand="lg mx-auto" className=''>
                 <Container>
-                    <Navbar.Brand to="/venderdetails">Vender</Navbar.Brand>
+                    <Navbar.Brand to="/venderdetails"><h2>Vender</h2></Navbar.Brand>
                     <Button type="Button" className="btn btn-light  justify-content-end"  >Logout</Button>
 
                 </Container>

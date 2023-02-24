@@ -4,12 +4,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import PIcon, { PIcons } from '../components/brick/Icon';
 import * as Animatable from 'react-native-animatable';
-import AcitveScreen from '../screens/ActiveBooking/StepOne/active';
+// import AcitveScreen from '../screens/ActiveBooking/StepOne/active';
 import Dashboard from '../screens/Dashboard/Dashboard';
 // import Settings from '../screens/settings/settings';
 import { themeColors } from '../utils/constant';
 // import Trips from '../screens/Trips';
-import DirectBooking from '../screens/DirectBooking/DirectBooking';
+// import DirectBooking from '../screens/DirectBooking/DirectBooking';
 import { fonts } from '../utils/theme';
 import SettingScreenNav from './settingsNav';
 

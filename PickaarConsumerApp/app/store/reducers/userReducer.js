@@ -4,15 +4,10 @@ const initialState = {
     // userID: '',
     phoneNo: '',
     name:'',
-    emailId:'',
-    fcmToken:'',
-    deviceId: null,
-    loginState: false,
-    emergencyContacts: [],
-    createdOn: '',
-    locations: [],
+    // deviceId: null,
+    loginState: false,  //login state checking  localstorage(sqllite) to save
     isLoading: false,
-    profileStatus: false,
+    profileStatus: false, // then profile status check to enable redirect to dashboard
     isPhoneNoValidateStatus: false
 }
 
@@ -24,13 +19,13 @@ export const userSlice = createSlice({
         // App Handshake callbacks
         onSuccessHandShake(state, action) {
             const { data } = action.payload;
+            // console.log("redux",action.payload)
             state.phoneNo = data?.phoneNo || '';
-            // state.emergencyContacts = data?.emergencyContacts || [];
-            // console.log("ADDRESS>>>>"+JSON.stringify(data?.locations))
-            // state.locations = data?.locations || [];
-            // state.createdOn = data?.createdOn || '';
+            // state.phoneNo = phoneNo || '';
+            console.log("redux",state.phoneNo)
             state.name= data?.name ||[];
-            // state.emailId=data?.emailId||[];
+            state.profileStatus= data?.profileStatus;
+            //  store it db
             state.isLoading = true;
 
         },
@@ -41,7 +36,7 @@ export const userSlice = createSlice({
 
         // Validate Phone Number callbacks
         onSuccessValidatePhoneNo(state, action) {
-            state.profileStatus = true
+            // state.profileStatus = true
             
         },
         onFailureValidatePhoneNo() {
@@ -49,15 +44,15 @@ export const userSlice = createSlice({
         },
 
         // Validate OTP callbacks 
-        onSuccessValidateOTP(state, action) {
-            state.loginState = true;
-            state.isOTPValidateStatus = true;
-        },
-        onFailureValidateOTP(state, action) {
-            state.loginState = false;
-            state.isOTPValidateStatus = false;
+        // onSuccessValidateOTP(state, action) {
+        //     state.loginState = true;
+        //     state.isOTPValidateStatus = true;
+        // },
+        // onFailureValidateOTP(state, action) {
+        //     state.loginState = false;
+        //     state.isOTPValidateStatus = false;
 
-        },
+        // },
 
         setParam(state, action) {
             state[action.payload.key] = action.payload.value

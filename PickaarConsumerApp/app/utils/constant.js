@@ -1,6 +1,8 @@
 export const localStorageKeys = {
     loginStatus: 'isAlreadyLoggedIn',
     uniquePhoneNo:'phoneNumber',
+    profileStatus:"profileStatus",
+    serviceLoc:'serviceLoc',
 }
 
 export const themeColors = {

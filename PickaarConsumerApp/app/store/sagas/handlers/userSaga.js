@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
-import { onFailureHandShake, onSuccessHandShake, onSuccessValidatePhoneNo, onFailureValidatePhoneNo, onFailureValidateOTP, onSuccessValidateOTP } from "../../reducers/userReducer";
-import { axiosHandShakeRequest, axioscreateNewAccountAPI, axiosOTPValidate } from "../axios/userApis";
+import { onFailureHandShake, onSuccessHandShake, onSuccessValidatePhoneNo, onFailureValidatePhoneNo } from "../../reducers/userReducer";
+import { axiosHandShakeRequest, axioscreateNewAccountAPI,  } from "../axios/userApis";
 import * as selectors from './selectors';
 
 /**
@@ -20,7 +20,7 @@ export function* initializeHandShakeSagas(request) {
     let resp = yield call(() => {
         return axiosHandShakeRequest(request)
     })
-    console.log("WORKING  "+JSON.stringify(resp))
+    console.log("WORKING  "+JSON.stringify(resp.data))
     if (resp.status == 200) {
         yield put(onSuccessHandShake(resp.data))
 
@@ -69,13 +69,13 @@ export function* createNewAccountSaga(request) {
                 otpValue: 1234
             }
  */
-export function* validateOTPSaga(request) {
-    const _OTPstatus = yield call(() => {
-        return axiosOTPValidate(request)
-    })
+// export function* validateOTPSaga(request) {
+//     const _OTPstatus = yield call(() => {
+//         return axiosOTPValidate(request)
+//     })
 
-    if (!_OTPstatus.status)
-        yield put(onFailureValidateOTP(_OTPstatus))
+//     if (!_OTPstatus.status)
+//         yield put(onFailureValidateOTP(_OTPstatus))
 
-    yield put(onSuccessValidateOTP(_OTPstatus))
-}
+//     yield put(onSuccessValidateOTP(_OTPstatus))
+// }

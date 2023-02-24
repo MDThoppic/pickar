@@ -2,37 +2,74 @@ import { CommonActions, useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, StatusBar, Text } from 'react-native';
 import { localStorageKeys } from '../../utils/constant';
-import { getData } from '../../utils/helpersFn';
+import { getData, storeData } from '../../utils/helpersFn';
 import LottieView from 'lottie-react-native';
 import CALL_SAGA from '../../store/sagas/types/types';
 import { useDispatch, useSelector } from 'react-redux';
+import Dashboard from '../Dashboard/Dashboard';
+import { Toast } from '../../components/brick/toast';
 
 export const SplashScreen = ({ navigation }) => {
     // let loaderText = ;
     const [loaderText, setloaderText] = useState('Fetching Info..');
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state.user.isLoading);
-    const phoneNo=useSelector((state)=>state.user.phoneNo)
+    const phoneNo = useSelector((state) => state.user.phoneNo)
+    const profileStatus = useSelector((state) => state.user.profileStatus)
 
     useEffect(() => {
-        if (isLoading)
-            // navigation.navigate('dashboard');
-            navigation.navigate('Signpopup');
+        //This storeData using the sqlLite ,the data as profilestatus 
+        console.log(">>>>>>>>>>",profileStatus,phoneNo)
+        if (profileStatus == true) {
+            console.log("profilestatus true");
+            navigation.navigate('dashboard');
+            storefu();
 
-    }, [isLoading])
+        }
+        else {
+            // navigation.navigate('SignInScreen');
+            console.log("profilestatus falses");
+            // Toast({ message: 'Please enter valid Phone Number to Proceed.', time: 'SHORT' });
+        }
+
+        // setData(, profileStatus);
+        // if(profileStatus == true) => Dashboard else sign
+
+    }, [isLoading]);
+
+    const storefu = async () => {
+        await storeData(localStorageKeys.profileStatus, profileStatus).then(value => {
+            console.log(profileStatus);
+         }).catch(e => { })
+
+    }
+
+    // useEffect(() => {
+    //     if (isLoading)
+    //      navigation.navigate('Signpopup');
+
+    // }, [isLoading])
 
     useEffect(() => {
         let phoneNumber;
         getData(localStorageKeys.uniquePhoneNo).then(value => {
             phoneNumber = value;
         })
+        // if (!phoneNumber) { // New Commer
+        //     navigation.navigate('SignInScreen');
+        //     return
+        // }
+
+        // if (phoneNumber) { // Existing Customer
+
         getData(localStorageKeys.loginStatus).then(status => {
+
             console.log(phoneNumber, status);
-            console.log(phoneNo)
+
             setloaderText('Hola! Found your detials..');
             if (status == 'Y' && phoneNumber) {
                 console.log("INSIDE")
-                dispatch({
+                dispatch({ // API to check whether customer is still active
                     type: CALL_SAGA.REQUEST_HANDSHAKE,
                     serviceId: 100,
                     serviceName: 'HandShake',
@@ -47,6 +84,8 @@ export const SplashScreen = ({ navigation }) => {
         }).catch(e => {
             console.log("Async Store Error :" + e);
         })
+        // }
+
 
     }, [])
 
@@ -56,7 +95,7 @@ export const SplashScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-    
+
             <LottieView
                 style={{ height: 200 }}
                 source={require('../../../assets/lottie/splashScreenLoader.json')}

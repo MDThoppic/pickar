@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Vender from '../Headers/Vender'
+import Vender from '../Headers/Vender';
+import axios from 'axios';
 
 
 export default function Newvender() {
+
+  const venderurl="http://localhost:3001/vender";
+  
   const[vender,setvender]=useState([{name: "", phoneno: "", lot: "", addr: "", age: "", Experience: "", Language: ""}])
  
   const handlesubmit = (e) => {
@@ -16,8 +20,14 @@ export default function Newvender() {
 };
 const subimtvedner = (e) => {
   e.preventdefalt();
-  console.log(vender);
-  // alert(JSON.stringify(vehicles));
+  // console.log(vender);
+  const arr={vender}
+  axios.post(venderurl, arr)
+  .then(res => {
+      console.log(res)
+  }).catch(err => {
+      console.log(err)
+  })
 }
   
   return (
@@ -26,7 +36,7 @@ const subimtvedner = (e) => {
       <div className="container m-3 ">
         <div className="row d-flex justify-content-center">
           <div className="col-md-5  p-4 m-5 border">
-            <form className='' onSubmit={subimtvedner}>
+            <form className='' >
               <h3 className='text-center text-uppercase'>ADD new Vender</h3>
               <div className="mb-3">
                 <label>Name</label>
@@ -34,7 +44,7 @@ const subimtvedner = (e) => {
                   type="text"
                   className="form-control "
                   placeholder="Name"
-                  name='name'
+                  name={vender.name}
                   onChange={handlesubmit}
                   required
                 />
@@ -45,7 +55,7 @@ const subimtvedner = (e) => {
                   type="number"
                   className="form-control "
                   placeholder="Mobile number"
-                  name='phoneno'
+                  name={vender.phoneno}
                   onChange={handlesubmit}
                   required
                 />
@@ -56,7 +66,7 @@ const subimtvedner = (e) => {
                   type="text"
                   className="form-control "
                   placeholder="Location"
-                  name='lot'
+                  name={vender.lot}
                   onChange={handlesubmit}
                   required
                 />
@@ -67,7 +77,7 @@ const subimtvedner = (e) => {
                   type="text"
                   className="form-control "
                   placeholder="Full address"
-                  name='Addr'
+                  name={vender.Addr}
                   onChange={handlesubmit}
                   required
                 />
@@ -78,7 +88,7 @@ const subimtvedner = (e) => {
                   type="text"
                   className="form-control "
                   placeholder="Enter Age"
-                  name='age'
+                  name={vender.age}
                   onChange={handlesubmit}
                   required
                 />
@@ -89,7 +99,7 @@ const subimtvedner = (e) => {
                   type="text"
                   className="form-control "
                   placeholder="Enter the Experience"
-                  name='Experience'
+                  name={vender.Experience}
                   onChange={handlesubmit}
                   required
                 />
@@ -100,7 +110,7 @@ const subimtvedner = (e) => {
                   type="text"
                   className="form-control "
                   placeholder="know Language"
-                  name='Language'
+                  name={vender.Language}
                   onChange={handlesubmit}
                   required
                 />
@@ -131,7 +141,7 @@ const subimtvedner = (e) => {
 
         
               <div className="d-grid mt-5">
-                <button type="submit" className="btn btn-primary" >
+                <button type="submit" className="btn btn-primary" onSubmit={subimtvedner} >
                   Submit
                 </button>
               </div>

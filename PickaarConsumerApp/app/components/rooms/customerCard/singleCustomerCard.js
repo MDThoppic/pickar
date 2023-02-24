@@ -49,7 +49,6 @@ export const SelectedBookingJSX = ({ item, from }) => {
 
         <View style={[styles.container]}>
             <View style={styles.BookingitemBlockA}>
-
                 {
                     rowOne.map((item, index) => {
                         return (

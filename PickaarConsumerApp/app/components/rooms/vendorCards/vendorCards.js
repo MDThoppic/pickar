@@ -29,13 +29,13 @@ const TagWrapperJSX = ({ width, name }) => {
 }
 
 const FirstColBlockJSX = ({ quotedAmt, save, isNegotiable }) => {
-    
+
     return (
         <View style={{ flex: 1, height: 150 }}>
             <View style={vCardStyles.C1.main}>
                 <View style={vCardStyles.C1.container}>
                     <View>
-                        <Text style={vCardStyles.C1.quotedAmtTxt}>{'\u20B9'} {quotedAmt}</Text>
+                        <Text style={vCardStyles.C1.quotedAmtTxt}>{'\u20B9'} quotedAmt</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
                             <Text style={vCardStyles.C1.savelabelTxt}>Save </Text>
                             <Text style={vCardStyles.C1.saveValueTxt}>{save}%</Text>
@@ -55,10 +55,20 @@ const FirstColBlockJSX = ({ quotedAmt, save, isNegotiable }) => {
 
 const ExpWrapperJSX = ({ vendorExp }) => {
     return (
-        <View style={vCardStyles.C2.blockBContainer}>
-            <Text style={vCardStyles.common.expLabel}>Exp.</Text>
-            <Text style={vCardStyles.common.expValue}>{vendorExp} </Text>
-        </View>
+        <>
+            <View style={vCardStyles.C2.blockBContainer}>
+                <Text style={vCardStyles.common.expLabel}>Date:-</Text>
+                <Text style={vCardStyles.common.expValue}>12/14/2003 </Text>
+                <View style={vCardStyles.C2.blockBContainer}>
+                    <Text style={vCardStyles.common.expLabel}>Trip Type:-</Text>
+                    <Text style={vCardStyles.common.expValue}>Return </Text>
+                </View>
+            </View>
+            <View style={vCardStyles.C2.blockBContainer}>
+                <Text style={vCardStyles.common.expLabel}>Return Date:-</Text>
+                <Text style={vCardStyles.common.expValue}>{vendorExp} </Text>
+            </View>
+        </>
     )
 }
 
@@ -79,10 +89,17 @@ const StarRatingWrapperJSX = ({ vendorStarRating }) => {
     )
 }
 
-const NameWrapperJSX = ({ name }) => {
+const PickupWrapperJSX = ({ name }) => {
     return (
         <View style={vCardStyles.C2.blockAContainerSubBlockA}>
-            <Text style={vCardStyles.common.nameLabelTxt}>{name}</Text>
+            <Text style={vCardStyles.common.nameLabelTxt}>32/1 mulim street pulimedu,vellore, </Text>
+        </View>
+    )
+}
+const DropWrapperJSX = ({ name }) => {
+    return (
+        <View style={vCardStyles.C2.blockAContainerSubBlockA}>
+            <Text style={vCardStyles.common.nameLabelTxt}>32/1 mulim street pulimedu, vellore</Text>
         </View>
     )
 }
@@ -102,16 +119,19 @@ const TopContainerJSX = ({ item }) => {
     return (
         <>
             <View style={vCardStyles.C2.blockAContainer}>
-                <NameWrapperJSX name={item.vendorName} />
-                <StarRatingWrapperJSX vendorStarRating={item.vendorStarRating} />
+                <PickupWrapperJSX />
+                <View>
+                    <DropWrapperJSX />
+                </View>
+                {/* <StarRatingWrapperJSX vendorStarRating={item.vendorStarRating} /> */}
             </View>
             <View>
-                <ExpWrapperJSX vendorExp={item.vendorExp} />
-                {
+                <ExpWrapperJSX />
+                {/* {
                     
                     (item.bookingPrivilege == 'Recommended' ||item.bookingPrivilege == 'Premium' || item.bookingPrivilege == 'Economy' || item.bookingPrivilege == 'Regular') &&
                     <Tagged bookingPrivilege={item.bookingPrivilege} />
-                }
+                } */}
             </View>
         </>
     )
@@ -130,13 +150,13 @@ const FooterItems = ({ item, index }) => {
 
 const FooterContainerJSX = () => {
     const footerItems = [{
-        label: 'CAR',
+        label: 'Vehicle',
         value: 'SEDAN'
     }, {
-        label: 'LUGGAGE',
-        value: '2323'
+        label: 'Seater',
+        value: '6'
     }, {
-        label: 'HEADER',
+        label: 'distance',
         value: '323'
     }]
 
@@ -185,17 +205,20 @@ const SecondColBlockJSX = ({ item }) => {
 
 export const RenderVendorCardJSX = ({ item }) => {
     // console.log(JSON.stringify(item))
-    const colors = [pStyles.recommendedColor, pStyles.premiumColor, pStyles.regularColor, pStyles.economyColor];
-    const previlage = ['Recommended', 'Premium', 'Regular', 'Economy'];
-    const colorCode = colors[previlage.indexOf(item.bookingPrivilege) == -1 ? 2 : previlage.indexOf(item.bookingPrivilege)];
+    // const colors = [pStyles.recommendedColor, pStyles.premiumColor, pStyles.regularColor, pStyles.economyColor];
+    // const previlage = ['Recommended', 'Premium', 'Regular', 'Economy'];
+    // const colorCode = colors[previlage.indexOf(item.bookingPrivilege) == -1 ? 2 : previlage.indexOf(item.bookingPrivilege)];
     // console.log(item.save)
     return (
-        <View key={item.quoteId} style={[styles.item, { borderLeftColor: colorCode }]}>
+        // <View key={item.quoteId} style={[styles.item]}>
+        <View style={[styles.item]}>
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
 
-                <FirstColBlockJSX quotedAmt={item.quotedAmtByKM} save={item.save} isNegotiable={item.isNegotiable} />
+                {/* <FirstColBlockJSX quotedAmt={item.quotedAmtByKM} save={item.save} isNegotiable={item.isNegotiable} /> */}
+                {/* <FirstColBlockJSX /> */}
+                <SecondColBlockJSX />
 
-                <SecondColBlockJSX item={item} />
+                {/* <SecondColBlockJSX item={item} /> */}
 
             </View>
         </View>

@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import { feedback } from '../sagas/handlers/selectors';
-import bookingSlice from './bookingReducer';
-import dashboardReducer from './dashboardReducer';
-import feebackReducer from './feebackReducer';
+import { BookingReducer } from './bookingReducer';
+// import bookingSlice from './bookingReducer';
+// import dashboardReducer from './dashboardReducer';
+// import feebackReducer from './feebackReducer';
 import modalSlice from './modalReducer';
-import quotesSlice from './quotesSlice';
+// import quotesSlice from './quotesSlice';
 import userReducer from './userReducer';
 
 
@@ -17,10 +18,10 @@ import userReducer from './userReducer';
 // })
 
 export default {
-    dashboard: dashboardReducer,
+    // dashboard: dashboardReducer,
     user: userReducer,
-    booking: bookingSlice,
-    quotes: quotesSlice,
+    Booking: BookingReducer,
+    // quotes: quotesSlice,
     modal: modalSlice,
-    feedback:feebackReducer
+    // feedback:feebackReducer
 }

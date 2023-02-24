@@ -4,7 +4,7 @@ import LottieView from 'lottie-react-native';
 import { useRef } from "react";
 import { useEffect } from "react";
 import PIcon, { PIcons } from "../../components/brick/Icon";
-import { CommonActions, useNavigation } from "@react-navigation/native";
+// import { CommonActions, useNavigation } from "@react-navigation/native";
 import { localStorageKeys } from "../../utils/constant";
 import { storeData } from "../../utils/helpersFn";
 import { useSelector } from "react-redux";
@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 const UserProfile = () => {
     const userDetail = useSelector((state)=>state.user)
 
-    console.log(userDetail.username);
+    console.log(userDetail.name);
     const avatarAnimate = useRef(null);
     useEffect(() => {
         avatarAnimate.current.play(87, 147)
@@ -30,8 +30,8 @@ const UserProfile = () => {
                 />
             </View>
             <View style={{ alignItems: 'flex-start', justifyContent: 'center', width: '60%' }}>
-                <Text style={{ fontFamily: pStyles.fontStyleB, fontSize: pStyles.fontSizeL }}>thoppic</Text>
-                <Text style={{ fontFamily: pStyles.fontStyleR, fontSize: pStyles.fontSizeM - 2, paddingVertical: 2 }}>9159139370</Text>
+                <Text style={{ fontFamily: pStyles.fontStyleB, fontSize: pStyles.fontSizeL }}>{userDetail.name}</Text>
+                <Text style={{ fontFamily: pStyles.fontStyleR, fontSize: pStyles.fontSizeM - 2, paddingVertical: 2 }}> +91  {userDetail.phoneNo}</Text>
                 <Text style={{ fontFamily: pStyles.fontStyleR, fontSize: pStyles.fontSizeM - 2 }}>mohamud2611@gmail.com</Text>
             </View>
 
@@ -70,13 +70,13 @@ const SettingList = ({ navigation }) => {
 
     const settingList = [
         {
-            name: 'Your Locations',
+            name: 'Your serivce Locations',
             redirectTo: 'location',
             icon: 'map-pin',
             iconbg: 'green'
         },
         {
-            name: 'Your Rides',
+            name: 'Your geting Rides',
             redirectTo: 'rides',
             icon: 'zap',
             iconbg: '#4c4cd6'

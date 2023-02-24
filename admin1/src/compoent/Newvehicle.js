@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import Vender from '../Headers/Vender';
+import axios from 'axios';
+
 
 export default function Newvehicle() {
-    const [vehicles, setvehicles] = useState([{ vehiclename: "", vehicletype: "", licenace: "", reneval: "", perkm: "", driver: "" }])
+
+    let venderurl = "http://localhost:3001/vender";
+    
+
+    const [vehicles, setvehicles] = useState([  { VenderID:"",vehiclename: "", vehicletype: "", licenace: "", reneval: "", perkm: "" }])
 
     const handlechange = (i, e) => {
         let newVehicles = [...vehicles];
@@ -18,25 +24,44 @@ export default function Newvehicle() {
     }
 
     const addFromfield = () => {
-        setvehicles([...vehicles, { vehiclename: "", vehicletype: "", licenace: "", reneval: "", perkm: "", driver: "" }])
+        setvehicles([...vehicles, { VenderID:"",vehiclename: "", vehicletype: "", licenace: "", reneval: "", perkm: "", driver: "" }])
     }
 
 
-    // const subimtvedner = (e) => {
-    //     e.preventdefalt();
-    //     console.log(vehicles);
-    //     alert(JSON.stringify(vehicles));
-    // }
+    const bookingsubmit = (e) => {
+        e.preventDefault();
+        console.log(vehicles);
+        // const item = { vehicles }
+        axios.post(venderurl, vehicles)
+            .then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
+    }
     return (
         <div>
             <Vender />
             <div className="container m-3 ">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-5  p-4 m-5 border">
-                        <form className='' >
+                        <form className=''  >
                             <h3 className='text-center text-uppercase'>ADD new vehicle</h3>
+                            <div className="mb-3">
+                                        <label>Vender ID</label>
+                                        <input
+                                            type="text"
+                                            className="form-control "
+                                            placeholder="Vender ID"
+                                            name='VenderID'
+                                            // value={element.VenderID || ""}
+                                            // onChange={e => handlechange(index, e)}
+                                            required
+                                        />
+                                    </div>
                             {vehicles.map((element, index) => (
                                 <div key={index}>
+                                   
                                     <div className="mb-3">
                                         <label>Vehicle Name</label>
                                         <input
@@ -119,7 +144,9 @@ export default function Newvehicle() {
                                                     <button type='button' className=" btn btn-danger  " onClick={() => removeFromfield(index)}>Remove</button>
                                                 </div>
                                                 <span>-----------------------------------------------------------------------------</span>
-                                            </div> : null
+                                            </div> : 
+                                                <span>-----------------------------------------------------------------------------</span>
+
                                     }
                                 </div>
                             ))}
@@ -130,7 +157,7 @@ export default function Newvehicle() {
                                 </button>
                             </div>
                             <div className="d-grid mt-5">
-                                <button type="submit" className="btn btn-primary" >
+                                <button type="submit" className="btn btn-primary" onClick={bookingsubmit} >
                                     Submit
                                 </button>
                             </div>

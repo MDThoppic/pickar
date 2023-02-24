@@ -1,20 +1,18 @@
+import { Switch } from 'antd';
 import axios from 'axios';
 import React, { useState } from 'react'
-import { ButtonGroup, ToggleButton } from 'react-bootstrap'
 import Order from '../Headers/Order'
 
 function Neworder() {
     let bookurl = "http://localhost:3001/booking";
 
-    const [radiovalue, setradiovalue] = useState('Oneway');
+    const [radiovalue, setradiovalue] = useState('');
     const [checked, setchecked] = useState(false);
 
 
     const [booking, setBooking] = useState({
-        isbookingstatus:"overcall",
+        isbookingstatus: "overcall",
         name: "",
-        // name1: "",
-        // phone: "",
         phoneno: "",
         from: "",
         to: "",
@@ -22,28 +20,19 @@ function Neworder() {
         time: "",
         Seaters: "",
         vehicletype: "",
-        checked: "",
-        return:"",
-        women:""
-    
-        // checked ?
-        // othername:"",
-        // otherphone:""
-        // :null
+        returnDate: "",
+        singleWomen: "",
+        toggle:"",
+        othername:"",
+        otherphone:""
+        
     });
-    const changeHolder = e => {
-        setBooking({
-            booking,
-            [e.target.name]:
-                e.currenttarget.value
-        });
-
+   
+    const radio = () => {
+        radiovalue ? setradiovalue(false) : setradiovalue(true);
     }
 
-    const radios = [
-        { name: 'Oneway', value: 'Oneway' },
-        { name: 'Round', value: 'Round' }
-    ];
+    
     const handlesubmit = (e) => {
         const { name, value } = e.currentTarget;
         setBooking((prev) => {
@@ -51,8 +40,9 @@ function Neworder() {
         })
         // console.log(e.target);
     };
+
     const bookingsubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(false);
         console.log(booking);
         const item = { booking, radiovalue }
         axios.post(bookurl, item)
@@ -66,8 +56,9 @@ function Neworder() {
         <div>
             <Order />
             <div className="container m-3 ">
-                <div className="row d-flex justify-content-center">
-                    <div className="col-md-5  p-4 m-5 border">
+                <div className="row d-flex justify-content-start">
+                    <div className="col-md-5  p-4 m-5 border-none border-dark rounded bg-light d-inline-block
+">
                         <form className='' onSubmit={bookingsubmit} >
                             <h3 className='text-center '>BOOKING</h3>
                             <div className="mb-3">
@@ -135,64 +126,32 @@ function Neworder() {
                                     onChange={handlesubmit}
                                 />
                             </div>
-                            <div className="mb-3">
-                                <label>Select Trip Type</label>
+                            <div className="mb-3 ml-3">
+                                <label className='me-5'>Select Trip Type</label>
+                                <><Switch onClick={radio} /></>
                             </div>
                             <div className='m-3'>
-                                <ButtonGroup className='d-flex' >
-                                    {radios.map((radio, idx) => (
-                                        <>
-
-                                            <ToggleButton
-                                                key={idx}
-                                                id={`radio-${idx}`}
-                                                type="radio"
-                                                // variant="secondary"
-                                                variant={idx % 2 ? 'outline-primary' : 'outline-success'}
-                                                name='radio'
-                                                value={radio.value}
-                                                checked={radiovalue === radio.value}
-                                                onChange={(e) => setradiovalue(e.currentTarget.value)}
-                                            // onChange={handlesubmit}
-
-                                            >
 
 
-                                                {radio.name}
-
-
-                                            </ToggleButton>
-                                            <div>
-                                                {
-                                                   !radiovalue % 2 ?
-                                                        <div>
-                                                            <div className="mb-3">
-                                                                <label>return date</label>
-                                                                <input
-                                                                    type="date"
-                                                                    className="form-control "
-                                                                    placeholder=""
-                                                                    name='return'
-                                                                    onChange={handlesubmit}
-                                                                    required
-                                                                />
-                                                            </div>
-
-                                                        </div>
-                                                        : null
-
-
-                                                }
+                                <>
+                                    {radiovalue ? <span onChange={handlesubmit} >Round
+                                        <div>
+                                            <div className="mb-3">
+                                                <label>Return date</label>
+                                                <input
+                                                    type="date"
+                                                    className="form-control "
+                                                    placeholder=""
+                                                    name='returnDate'
+                                                    onChange={handlesubmit}
+                                                    required
+                                                />
                                             </div>
-                                        </>
 
-
-                                    ))}
-                                </ButtonGroup >
-
+                                        </div>
+                                    </span> :<span onChange={handlesubmit}>oneway</span>}
+                                </>
                             </div>
-
-
                             <div className='mb-3 d-flex '>
                                 <label className=' me-3'>Select Vehice Type :   </label>
                                 <select className='form-control' name='vehicletype' id='vehicle'
@@ -217,14 +176,14 @@ function Neworder() {
                                     placeholder="Total Seater"
                                     name='Seaters'
                                     onChange={handlesubmit}
-                                // required
+                                required
                                 />
                             </div>
                             <div className="form-check">
                                 <input className="form-check-input"
-                                    type="checkbox" value=""
+                                    type="checkbox" value="singleWomen"
                                     id="flexCheckChecked"
-                                    name='women'
+                                    name='singleWomen'
                                     onChange={handlesubmit} />
                                 <label className="form-check-label" htmlFor="flexCheckChecked">
                                     isSinglewomen
@@ -253,14 +212,14 @@ function Neworder() {
                                                 className='form-control'
                                                 placeholder='Enter his/her Phone number'
                                                 name='otherphone'
-                                                onChange={changeHolder}
+                                                onChange={handlesubmit}
                                                 required
                                             />
                                             <input type="text"
                                                 className="form-control mt-4"
                                                 placeholder='Enter his/her Name'
                                                 name='othername'
-                                                onChange={changeHolder}
+                                                onChange={handlesubmit}
                                                 required
                                             />
                                         </div>
