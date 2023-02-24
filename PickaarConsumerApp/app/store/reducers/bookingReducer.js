@@ -10,7 +10,7 @@ const initialState={
 
 
 export const bookingReducer=createSlice({
-    name:'BooKing',
+    name:'booKing',
     initialState,
     reducers:{
         onSuccessBookingDetails(state,action){

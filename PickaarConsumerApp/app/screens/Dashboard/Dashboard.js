@@ -5,6 +5,7 @@ import { fonts } from '../../utils/theme';
 import { useDispatch, useSelector } from 'react-redux';
 import { getData, storeData } from '../../utils/helpersFn';
 import ActiveBook from '../ActiveBooking/StepOne/ActionBook';
+import { Icon } from 'react-native-gradient-icon';
 
 // import { value } from 'deprecated-react-native-prop-types/DeprecatedTextInputPropTypes';
 
@@ -82,7 +83,7 @@ export default function Dashboard() {
 
             <View style={styles.container}>
                 <StatusBar backgroundColor={themeColors.white} barStyle="dark-content" />
-                <View style={{ height: 40,elevation: 6, }}>
+                <View style={{ height: 40,elevation: 6,shadowColor: "#000", }}>
                     {/* Header component work */}
                 </View>
                 <View>
@@ -92,9 +93,16 @@ export default function Dashboard() {
                     borderBottomWidth: 0, shadowOffset: 1, backgroundColor: 'white', height: 30, shadowColor: "#000",
                     // shadowOpacity: 0.27,
                     // shadowRadius: 4.65,
-                    elevation: 6,
+                    // elevation: 6,
                 }} >
-                    <Text>welcome</Text>
+                   <View style={{flexDirection:'row-reverse',flex:1,paddingLeft:10}}>
+                    <TouchableOpacity>
+                        <Icon name='menu' color='black'/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{paddingEnd:10}}>
+                        <Icon name='filter' color='black'/>
+                    </TouchableOpacity>
+                   </View>
                 </View>
                 <View>
                     <ActiveBook />

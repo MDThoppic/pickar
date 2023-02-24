@@ -13,20 +13,20 @@ export const Location = ({ navigation }) => {
 
     const [select, setSelected] = useState([])
     const data = [
-        { key: '1', value: 'Mobiles', disabled: true },
-        { key: '2', value: 'Appliances' },
-        { key: '3', value: 'Cameras' },
-        { key: '4', value: 'Computers', disabled: true },
-        { key: '5', value: 'Vegetables' },
-        { key: '6', value: 'Diary Products' },
-        { key: '7', value: 'Drinks' },
-        { key: '8', value: 'tea', disabled: true },
-        { key: '9', value: 'coffee' },
-        { key: '10', value: 'assate' },
+        { key: '1', value: 'chittor', disabled: true },
+        { key: '2', value: 'kanichipuram' },
+        { key: '3', value: 'vellore' },
+        { key: '4', value: 'changalpeit' },
+        { key: '5', value: 'arcot' },
+        { key: '6', value: 'ranipet' },
+        { key: '7', value: 'poonthamalli' },
+        { key: '8', value: 'Egmore', },
+        { key: '9', value: 'chennai west' },
+        { key: '10', value: 'sripuram' },
         // { key: '11', value: 'Computers', disabled: true },
-        { key: '11', value: 'team' },
-        { key: '12', value: ' Products' },
-        { key: '13', value: 'setvalue' },
+        { key: '11', value: 'salam' },
+        { key: '12', value: ' Eroad' },
+        { key: '13', value: 'kalpakam' },
     ]
 
 

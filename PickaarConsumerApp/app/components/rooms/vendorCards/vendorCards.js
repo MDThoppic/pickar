@@ -9,6 +9,7 @@ import * as Animatable from 'react-native-animatable';
 import PIcon, { PIcons } from '../../brick/Icon';
 import StarRating from 'react-native-star-rating-widget';
 import { useNavigation } from '@react-navigation/native';
+import { Icon } from 'react-native-gradient-icon';
 
 
 const BargainableJSX = () => {
@@ -92,6 +93,7 @@ const StarRatingWrapperJSX = ({ vendorStarRating }) => {
 const PickupWrapperJSX = ({ name }) => {
     return (
         <View style={vCardStyles.C2.blockAContainerSubBlockA}>
+        <Icon name='map-pin' color='green' size={13} style={{paddingEnd:10}}/>
             <Text style={vCardStyles.common.nameLabelTxt}>32/1 mulim street pulimedu,vellore, </Text>
         </View>
     )
@@ -99,6 +101,7 @@ const PickupWrapperJSX = ({ name }) => {
 const DropWrapperJSX = ({ name }) => {
     return (
         <View style={vCardStyles.C2.blockAContainerSubBlockA}>
+        <Icon name='map-pin' size={13} color='red' style={{paddingEnd:10}}/>
             <Text style={vCardStyles.common.nameLabelTxt}>32/1 mulim street pulimedu, vellore</Text>
         </View>
     )
@@ -121,6 +124,8 @@ const TopContainerJSX = ({ item }) => {
             <View style={vCardStyles.C2.blockAContainer}>
                 <PickupWrapperJSX />
                 <View>
+                <Text style={{marginStart:80,fontSize:9}}>----------------To--------------</Text>
+
                     <DropWrapperJSX />
                 </View>
                 {/* <StarRatingWrapperJSX vendorStarRating={item.vendorStarRating} /> */}

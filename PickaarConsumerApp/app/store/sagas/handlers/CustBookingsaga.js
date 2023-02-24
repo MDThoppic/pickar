@@ -4,12 +4,12 @@ import {onSuccessBookingDetails,onFailureBookingDetails} from '../../reducers/bo
 import { axiosgetCustBookingDetails } from '../axios/GetBookingApi'
 
 export default function getCustBookingDetails() {
-    let resp =yield call(() => {
+    let resp = call(() => {
         return axiosgetCustBookingDetails(request)
     })
     if (resp.status == 200) {
-        yield put(onSuccessBookingDetails(resp))
+         put(onSuccessBookingDetails(resp))
 
     } else
-        yield put(onFailureBookingDetails())
+         put(onFailureBookingDetails())
 }
