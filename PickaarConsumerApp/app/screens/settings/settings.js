@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 const UserProfile = () => {
     const userDetail = useSelector((state)=>state.user)
 
-    console.log(userDetail.name);
+    console.log("phoneNo",userDetail.phoneNo);
     const avatarAnimate = useRef(null);
     useEffect(() => {
         avatarAnimate.current.play(87, 147)

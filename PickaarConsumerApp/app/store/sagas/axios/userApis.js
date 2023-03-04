@@ -7,8 +7,8 @@ export const axiosHandShakeRequest = async (request) => {
     try {
         console.log(USER_END_URL)
         const userObj = await axios.get(
-            USER_END_URL + 'user/vendors/details/' + phoneNo,
-            //    ' http://192.168.43.10:4003/api/user/vendors/details/'+phoneNo,
+            USER_END_URL + 'vendors/details/' + phoneNo,
+            //    ' http://192.168.132.50:4003/api/user/vendors/details/'+phoneNo,
             // {
             //     params:phoneNo,
             //     // responseType: 'json'

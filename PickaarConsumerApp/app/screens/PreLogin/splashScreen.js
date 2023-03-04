@@ -1,6 +1,6 @@
 import { CommonActions, useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, Text } from 'react-native';
+import { View, StyleSheet, StatusBar, Text, Alert } from 'react-native';
 import { localStorageKeys } from '../../utils/constant';
 import { getData, storeData } from '../../utils/helpersFn';
 import LottieView from 'lottie-react-native';
@@ -15,32 +15,34 @@ export const SplashScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state.user.isLoading);
     const phoneNo = useSelector((state) => state.user.phoneNo)
-    const profileStatus = useSelector((state) => state.user.profileStatus)
-
+    const profileStatus = useSelector((state) => state.user?.profileStatus)
+    
     useEffect(() => {
         //This storeData using the sqlLite ,the data as profilestatus 
-        console.log(">>>>>>>>>>",profileStatus,phoneNo)
+        console.log(">>>>>>>>>>",profileStatus)
         if (profileStatus == true) {
             console.log("profilestatus true");
-            navigation.navigate('dashboard');
             storefu();
-
+            // storefu();
         }
-        else {
-            // navigation.navigate('SignInScreen');
+        if(profileStatus != null){
             console.log("profilestatus falses");
-            // Toast({ message: 'Please enter valid Phone Number to Proceed.', time: 'SHORT' });
+
+            navigation.navigate('SignInScreen');
+
         }
 
         // setData(, profileStatus);
         // if(profileStatus == true) => Dashboard else sign
 
-    }, [isLoading]);
+    }, [profileStatus]);
 
     const storefu = async () => {
-        await storeData(localStorageKeys.profileStatus, profileStatus).then(value => {
+        const res = await storeData(localStorageKeys.profileStatus, 'yes').then(value => {
             console.log(profileStatus);
          }).catch(e => { })
+         navigation.navigate('dashboard');
+
 
     }
 

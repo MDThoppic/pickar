@@ -1,9 +1,10 @@
 import { takeEvery } from "redux-saga/effects";
-import getCustBookingDetails from "./handlers/CustBookingsaga";
+import { getCustBookingDetails } from "./handlers/CustBookingsaga";
+// import getCustBookingDetails from "./handlers/CustBookingsaga";
 // import { getBookingsConfirm, getBookingsTollDetails, getTollRouteData } from "./handlers/bookingSaga";
 // import { getDashboardSAGA } from "./handlers/dashboardSaga";
 // import { getListOfBookingsByPhoneNo, getBookingsDetailsByID, getQuotesDetailsByBookingID } from "./handlers/quotesSaga";
-import { initializeHandShakeSagas, createNewAccountSaga, validateOTPSaga } from "./handlers/userSaga";
+import { initializeHandShakeSagas, createNewAccountSaga, validateOTPSaga, } from "./handlers/userSaga";
 // import { getFeedbackByVendorId } from './handlers/feedbackSaga';
 import CALL_SAGA from './types/types';
 
@@ -11,7 +12,7 @@ import CALL_SAGA from './types/types';
 export default function* rootSaga() {
     yield takeEvery(CALL_SAGA.REQUEST_HANDSHAKE, initializeHandShakeSagas);
     yield takeEvery(CALL_SAGA.REQUEST_CREATE_NEW_ACCOUNT, createNewAccountSaga);
-    yield takeEvery(CALL_SAGA.REQUEST_GET_CUST_BOOKING_DETAILS,getCustBookingDetails)
+    yield takeEvery(CALL_SAGA.REQUEST_GET_CUST_BOOKING_DETAILS, getCustBookingDetails);
     // yield takeEvery(CALL_SAGA.REQUEST_VALIDATE_OTP, validateOTPSaga);
     // DASHBOARD
     // yield takeEvery(CALL_SAGA.REQUEST_DASHBOARD_ON_LOAD, getDashboardSAGA);
@@ -28,7 +29,7 @@ export default function* rootSaga() {
 
     //FEEDBACK SCREEN
     // yield takeEvery(CALL_SAGA.REQUEST_GET_VENDOR_FEEDBACK_BY_VENDORID, getFeedbackByVendorId);
-    
+
 
 
     // yield takeEvery(CALL_SAGA.REQUEST_GET_DRIVER_DETAILS_BY_ID, getBookingsDetailsByID1);

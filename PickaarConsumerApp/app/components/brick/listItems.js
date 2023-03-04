@@ -3,7 +3,7 @@ import { pStyles } from "../../utils/theme";
 import PIcon, { PIcons } from "./Icon";
 import { useDispatch, useSelector } from 'react-redux';
 import { setConfig } from "../../store/reducers/modalReducer";
-import { setQuoteParam } from "../../store/reducers/quotesSlice";
+// import { setQuoteParam } from "../../store/reducers/quotesSlice";
 
 // export const WrapperItem = (Wrapped, prop) => () => (
 //     <TouchableOpacity onPress={() => { console.log("TEST") }}

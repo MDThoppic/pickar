@@ -1,8 +1,9 @@
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import SignInScreen from '../screens/PreLogin/SignInScreen';
+import SignInScreen from '../screens/PreLogin/SignInScreen';
 import MainTab from './MainTabNav';
-// import { SplashScreen } from '../screens/PreLogin/splashScreen';
+import { SplashScreen } from '../screens/PreLogin/splashScreen';
+import ActiveBookingStackNavScreens from './activeBookingNav';
 // import Signinpopup from '../screens/Dashboard/components/Signinpopup';
 
 // import FeedbackComponent from '../screens/ActiveBooking/StepTwo/Feedback';
@@ -19,7 +20,7 @@ const RootStackNavScreens = () => {
     return (
         <RootStack.Navigator initialRouteName='dashboard'>
 
-            {/* <RootStack.Screen
+             <RootStack.Screen
                 name="splashScreen"
                 component={SplashScreen}
                 options={{
@@ -31,8 +32,8 @@ const RootStackNavScreens = () => {
                 component={SignInScreen}
                 options={{
                     headerShown: false,
-                }}
-            /> */}
+                }} 
+            /> 
 
             <RootStack.Screen
                 name="dashboard"
@@ -56,7 +57,7 @@ const RootStackNavScreens = () => {
                 options={{
                     headerShown: false,
                     cardStyle: { backgroundColor: '#fff' }
-                }} />
+                }} />*/}
             <RootStack.Screen
                 name="active"
                 component={ActiveBookingStackNavScreens}
@@ -64,7 +65,7 @@ const RootStackNavScreens = () => {
 
                     headerShown: false,
                     cardStyle: { backgroundColor: '#fff' }
-                }} /> */}
+                }} /> 
 
             {/* <RootStack.Screen
                 name="setting"

@@ -1,8 +1,9 @@
 
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ActiveBookingList from '../screens/ActiveBooking/StepTwo/activeBookingList';
-import ActiveBookingDetail from '../screens/ActiveBooking/StepTwo/activeDetail';
+import quotesBook from '../screens/ActiveBooking/StepTwo/quotesBooking';
+import ActiveBook from '../screens/ActiveBooking/StepOne/ActionBook';
+import quotesBooking from '../screens/ActiveBooking/StepTwo/quotesBooking';
 
 const BookingStack = createNativeStackNavigator();
 
@@ -11,22 +12,21 @@ const ActiveBookingStackNavScreens = () => {
     return (
         <BookingStack.Navigator>
             <BookingStack.Screen
-                name='BookingList'
-                component={ActiveBookingList}
+                name='ActiveBook'
+                component={ActiveBook}
                 options={{
                     headerShown: false
                 }}
             />
 
             <BookingStack.Screen
-                name='ActiveDetail'
-                component={ActiveBookingDetail}
+                name='quotesBooking'
+                component={quotesBooking}
                 options={{
                     headerShown: false
                 }}
             />
-
-
+           
         </BookingStack.Navigator>
     )
 }

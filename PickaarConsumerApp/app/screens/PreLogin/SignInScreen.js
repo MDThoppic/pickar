@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, StatusBar, Text, Alert } from 'react-native';
 import { localStorageKeys, themeColors } from '../../utils/constant';
 import * as Animatable from 'react-native-animatable';
-import OTPBlock from './components/otpblock';
 import PhoneNoBlock from './components/phoneNoBlock';
 import { useDispatch, useSelector } from 'react-redux';
 import CALL_SAGA from '../../store/sagas/types/types';
@@ -36,7 +35,8 @@ export default function SignInScreen(props) {
     const loginState = useSelector((state) => state.user.loginState);
     const profileStatus = useSelector((state) => state.user.profileStatus);
 
-    let sqlPhoneNo;
+    let phoneNumber1;
+    
 
     /**
      * @description Triggered once PhoneNumber entered
@@ -85,16 +85,16 @@ export default function SignInScreen(props) {
 
     useEffect (()=>{
         //get sqlLite to get details to store the phoneNo
-        let phoneNumber;
+        // let phoneNumber;
         getData(localStorageKeys.uniquePhoneNo).then(value => {
-            phoneNumber = value;
-        console.log("number define",phoneNumber)
-        sqlPhoneNo=phoneNumber;
+            phoneNumber1 = value;
+        console.log("number define",phoneNumber1)
+        // sqlPhoneNo=phoneNumber1;
         //alert is the already register the vendor
-        if(phoneNumber){
+        if(phoneNumber1){
             Alert.alert(
                 "Info",
-                    "ones is Done. Let will access the vendor appplication. To more INFO  Content above Number : 9159139370",
+                    `ones is Done. Let will access the vendor appplication. To more INFO  Content above Number :  ${phoneNumber1}`,
 
             )
         }
@@ -102,6 +102,7 @@ export default function SignInScreen(props) {
         // console.log("number define",sqlPhoneNo)
 
     },[])
+    console.log("out",phoneNumber1);
 
     const checkingData = async () => {
         console.log("INSIDE")
@@ -111,6 +112,12 @@ export default function SignInScreen(props) {
         await dispatch(setParam({ key: "loginState", value: true }));
         await storeData(localStorageKeys.loginStatus, 'Y').then(value => { }).catch(e => { })
         await storeData(localStorageKeys.uniquePhoneNo, phoneNumber).then(value => { }).catch(e => { })
+
+        // Alert.alert(
+        //     "Info",
+        //         `ones is Done. Let will access the vendor appplication. To more INFO  Content above Number : ${phoneNumber}`,
+
+        // )
         // dispatch({
         //     type: CALL_SAGA.REQUEST_CREATE_NEW_ACCOUNT,
         //     serviceId: 101,
@@ -120,6 +127,7 @@ export default function SignInScreen(props) {
         // });
         // props.navigation.navigate('dashboard', { screen: 'home' });
     }
+        console.log("values", phoneNumber1);
 
     /**
   * @description App launch handshake on load

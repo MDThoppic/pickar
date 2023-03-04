@@ -20,7 +20,7 @@ import userReducer from './userReducer';
 export default {
     // dashboard: dashboardReducer,
     user: userReducer,
-    // booking:bookingReducer,
+    booking:bookingReducer,
     // quotes: quotesSlice,
     modal: modalSlice,
     // feedback:feebackReducer

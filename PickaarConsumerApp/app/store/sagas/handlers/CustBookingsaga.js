@@ -1,15 +1,22 @@
 
-import { call, put } from 'redux-saga/effects';
-import {onSuccessBookingDetails,onFailureBookingDetails} from '../../reducers/bookingReducer';
+import { useSelector } from 'react-redux';
+import { call, put, select } from 'redux-saga/effects';
+import { onSuccessBookingDetails, onFailureBookingDetails } from '../../reducers/bookingReducer';
 import { axiosgetCustBookingDetails } from '../axios/GetBookingApi'
+import * as selectors from './selectors'
 
-export default function getCustBookingDetails() {
-    let resp = call(() => {
-        return axiosgetCustBookingDetails(request)
+export function* getCustBookingDetails(request) {
+    const { district } = request;
+    console.log("welcome",district)
+    const responce = yield call(() => {
+        return axiosgetCustBookingDetails(district)
     })
-    if (resp.status == 200) {
-         put(onSuccessBookingDetails(resp))
+    // console.log("responce data", JSON.stringify(responce))
+    if (responce.status == 200) {
+        // console.log("if condition", responce)
+        yield put(onSuccessBookingDetails(responce))
 
-    } else
-         put(onFailureBookingDetails())
+    } else {
+       yield put(onFailureBookingDetails())
+    }
 }

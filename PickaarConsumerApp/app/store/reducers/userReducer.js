@@ -7,7 +7,7 @@ const initialState = {
     // deviceId: null,
     loginState: false,  //login state checking  localstorage(sqllite) to save
     isLoading: false,
-    profileStatus: false, // then profile status check to enable redirect to dashboard
+    profileStatus: null, // then profile status check to enable redirect to dashboard
     isPhoneNoValidateStatus: false
 }
 

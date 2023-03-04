@@ -30,7 +30,7 @@ export default function ModalInfo(props) {
                             <View style={{ height: 40, width: '90%', backgroundColor: themeColors.primary, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderRadius: 5, }}>
                                 <Text style={{ fontFamily: fonts.RubikMedium, letterSpacing: 1.1, fontSize: 18, color: themeColors.white }}>Okay</Text>
                             </View>
-                        </TouchableOpacity >
+                        </TouchableOpacity>
                     </View>
                 </View>
             </TouchableWithoutFeedback>

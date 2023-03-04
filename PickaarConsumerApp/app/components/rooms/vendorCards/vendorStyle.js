@@ -24,7 +24,7 @@ export const vCardStyles = {
         blockAContainerSubBlockA: { height: 30, width: '100%' , overflow: 'hidden', flexDirection: 'row', alignItems: 'flex-start' },
         blockAContainerSubBlockB: { height: 30, width: '40%', flexDirection: 'column', justifyContent: 'flex-end' },
         blockBContainer: { flexDirection: 'row', alignItems: 'center', paddingTop: 3 },
-        blockBContainerBlock: { paddingTop: 10, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: themeColors.lightGray },
+        blockBContainerBlock: { paddingTop: 1, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: themeColors.lightGray },
         blockBContainerBlockB: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' },
         startRatingContainer: { justifyContent: 'center', alignItems: 'center' },
         startRatingLabel: { fontSize: 9, fontFamily: fonts.RubikMediumItalic, color: themeColors.primary, paddingLeft: 20 },

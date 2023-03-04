@@ -8,7 +8,9 @@ const initialState = {
 
     message: '',
     modalName: 'INFO',
-    modalContent: {}
+    modalContent: {},
+
+    params:{},
 }
 
 export const modalSlice = createSlice({
@@ -22,7 +24,7 @@ export const modalSlice = createSlice({
 
         setConfig(state, action) {
 
-            const { msg, visible, modal, swipeDirection, animationType, transparent, backDrop, modalContent } = action.payload;
+            const { msg, visible, modal, swipeDirection, animationType, transparent, backDrop, modalContent,params } = action.payload;
             state.visibleConfig = visible || false;
             state.animationTypeConfig = animationType || 'fade';
             state.transparentConfig = transparent || true;
@@ -30,7 +32,7 @@ export const modalSlice = createSlice({
             state.message = msg || 'No Info';
             state.modalName = modal || 'INFO';
             state.modalContent = modalContent || 1;
-
+            state.params =params||null;
         }
 
     }

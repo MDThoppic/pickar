@@ -1,21 +1,23 @@
 import axios from 'axios';
 import { BOOKING_END_URL } from "@env";
+import { useSelector } from 'react-redux';
 
-export const axiosgetCustBookingDetails = async (request) => {
+export const axiosgetCustBookingDetails = async (district) => {
+    console.log(BOOKING_END_URL)
     try {
-        console.log(USER_END_URL)
-        // const userObj = await axios.get(
-        //     BOOKING_END_URL + 'user/vendors/details/',
-        //     //' http://192.168.43.10:4003/api/user/vendors/details/'+phoneNo,
-        //     {
-        //         responseType: 'json'
-        //     }
-        // );
+        console.log("try", BOOKING_END_URL,  { district: JSON.parse(district)  })
+        const userObj = await axios.post(
+            // BOOKING_END_URL + 'booking/bookirnglist',
+            'http://192.168.132.50:4002/api/booking/bookinglist',
+            { district: JSON.parse(district)  }
+        );
+        // console.log("Api result",userObj.data)
+        return userObj.data;
 
-        const BookingObj=await require('../../../mockAPI/quotesAPI.json');
-        console.log("Api test", JSON.stringify(BookingObj.bookingListByPhoneNo));
-        return BookingObj.bookingListByPhoneNo;
-        ;
+
+        // const BookingObj = await require('../../../mockAPI/quotesAPI.json');
+        // console.log("Api test", JSON.stringify(BookingObj.bookingListByPhoneNo));
+        // return BookingObj;
     } catch (e) {
         console.log("Api test error", JSON.stringify(e));
         return false

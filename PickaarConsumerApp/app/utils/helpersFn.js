@@ -40,22 +40,22 @@ export const frameQuoteBoxFunction = (quotesList) => {
         // "from":quotesList.dropAddress.distance,
 
 
-        "quoteId": quotesList._id,
-        "vendorName": quotesList?.vendor?.name,
-        "vendorAge":quotesList?.vendor?.age,
-        "vendorId": quotesList?.vendor?.vendorId,
-        "vendorStarRating": quotesList?.vendor?.starRating,
-        "vendorExp": quotesList?.vendor?.exp,
-        "vendorCarType": quotesList?.car?.carModel,
-        "vendorCarName": "Honda City",
-        "vendorLuggageCapacity": quotesList?.car?.carLuggage,
-        "bookingPrivilege": quotesList?.quote?.bookingPrivilege,
-        "quotedAmtByKM": quotesList?.quote?.quotedAmt,
-        "quoteVendorAmt": quotesList?.quote?.beta,
-        "save": quotesList?.quote?.save,
-        "isNegotiable": quotesList?.quote?.isNegotiable,
-        "quotedAproxAmt": quotesList?.quote?.quotedAproxAmt,
-        "feedbackDetails": {},
+        // "quoteId": quotesList._id,
+        // "vendorName": quotesList?.vendor?.name,
+        // "vendorAge":quotesList?.vendor?.age,
+        // "vendorId": quotesList?.vendor?.vendorId,
+        // "vendorStarRating": quotesList?.vendor?.starRating,
+        // "vendorExp": quotesList?.vendor?.exp,
+        // "vendorCarType": quotesList?.car?.carModel,
+        // "vendorCarName": "Honda City",
+        // "vendorLuggageCapacity": quotesList?.car?.carLuggage,
+        // "bookingPrivilege": quotesList?.quote?.bookingPrivilege,
+        // "quotedAmtByKM": quotesList?.quote?.quotedAmt,
+        // "quoteVendorAmt": quotesList?.quote?.beta,
+        // "save": quotesList?.quote?.save,
+        // "isNegotiable": quotesList?.quote?.isNegotiable,
+        // "quotedAproxAmt": quotesList?.quote?.quotedAproxAmt,
+        // "feedbackDetails": {},
         "moreInfo": [
             {
                 "title": "Driver & Vehicle Details",
@@ -63,13 +63,13 @@ export const frameQuoteBoxFunction = (quotesList) => {
                 "list": [
                     {
                         "key": "Name",
-                        "value":quotesList?.vendor?.name,
+                        "value":'mohamud',
                         "valueType": "text",
                         "type": "singleLine"
                     },
                     {
                         "key": "Age",
-                        "value": quotesList?.vendor?.age,
+                        "value": 12,
                         "valueType": "text",
                         "type": "singleLine"
                     },
@@ -96,17 +96,17 @@ export const frameQuoteBoxFunction = (quotesList) => {
                     {
                         "type": "multiLine",
                         "key": "From Address",
-                        "value":  quotesList?.bookingDetails?.pickupAddress?.address +"  Pincode-"+quotesList?.bookingDetails?.pickupAddress?.pincode
+                        "value":  '32/1 muslim street pulimedu vellore tamilnadu'
                     },
                     {
                         "type": "multiLine",
                         "key": "To Address",
-                        "value": quotesList?.bookingDetails?.dropAddress?.address+"  Pincode-"+quotesList?.bookingDetails?.dropAddress?.pincode,
+                        "value":"32/1 muslim street pulimedu chennai tamilnadu  Pincode-",
                         "style": "{ borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: themeColors.gray}"
                     },
                     {
                         "key": "Approximate Distance",
-                        "value": quotesList?.bookingDetails?.distance +"Km",
+                        "value": "215Km",
                         "valueType": "text",
                         "type": "singleLine"
                     },
@@ -124,19 +124,19 @@ export const frameQuoteBoxFunction = (quotesList) => {
                     },
                     {
                         "key": "No. Of passangers",
-                        "value": quotesList?.bookingDetails?.seaters,
+                        "value": 5,
                         "valueType": "text",
                         "type": "singleLine"
                     },
                     {
                         "key": "Start Date & Time",
-                        "value": quotesList?.bookingDetails?.pickUpDate,
+                        "value": 12/11/2023,
                         "valueType": "text",
                         "type": "singleLine"
                     },
                     {
                         "key": "Return Date & Time",
-                        "value":quotesList?.bookingDetails?.returnDate,
+                        "value":23/11/2023,
                         "valueType": "text",
                         "type": "singleLine"
                     }
@@ -148,13 +148,13 @@ export const frameQuoteBoxFunction = (quotesList) => {
                 "list": [
                     {
                         "key": "Driver Quoted Per Km",
-                        "value": quotesList?.quote?.quotedAmt+'/km',
+                        "value":'/km',
                         "valueType": "text",
                         "type": "singleLine"
                     },
                     {
                         "key": "Extra KM",
-                        "value": quotesList?.quote?.quotedAmt+'/km',
+                        "value": '/km',
                         "type": "multiLineWithInfo",
                         "info": "This charge applicable for additional KM.",
                         "modalType": "INFO",
@@ -162,7 +162,7 @@ export const frameQuoteBoxFunction = (quotesList) => {
                     },
                     {
                         "key": "Driver Beta",
-                        "value":quotesList?.quote?.beta,
+                        "value":500,
                         "type": "multiLineWithInfo",
                         "info": "Driver beta applicable for Outstation trips only.",
                         "modalType": "INFO",

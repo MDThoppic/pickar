@@ -35,6 +35,7 @@ const TabButton = (props) => {
             viewRef.current.animate({ 0: { scale: 1.4, rotate: '360deg' }, 1: { scale: 1, rotate: '0deg' } });
         }
     }, [focused])
+    
 
 
     return (
@@ -42,8 +43,9 @@ const TabButton = (props) => {
             onPress={onPress}
             activeOpacity={1}
             style={[styles.container]}>
-            <View style={[styles.container, { padding: 6 }]}>
-                <Animatable.View
+            <View style={[styles.container, { padding: 6 }]} >
+                <Animatable.View 
+                               
                     ref={viewRef}
                     duration={1000}
                     style={[styles.container, { alignItems: 'flex-end' }]}
@@ -51,7 +53,7 @@ const TabButton = (props) => {
                     <PIcon type={item.type} size={14} name={focused ? item.activeIcon : item.inActiveIcon} color={focused ? themeColors.yellow : themeColors.gray} />
                 </Animatable.View>
                 <View style={[styles.container, { alignItems: 'flex-end', paddingTop: 0 }]}>
-                    <Text style={[styles.tabTitle, focused ? { color: themeColors.white } : { color: themeColors.gray }, focused ? { fontFamily: fonts.RubikMedium } : { fontFamily: fonts.RubikLight }]}>{item.label}</Text>
+                    <Text  style={[styles.tabTitle, focused ? { color: themeColors.white } : { color: themeColors.gray }, focused ? { fontFamily: fonts.RubikMedium } : { fontFamily: fonts.RubikLight }]}>{item.label}</Text>
                 </View>
             </View>
         </TouchableOpacity>

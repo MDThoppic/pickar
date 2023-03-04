@@ -1,5 +1,6 @@
 import { call, put } from "redux-saga/effects";
-import { onFailureHandShake, onSuccessHandShake, onSuccessValidatePhoneNo, onFailureValidatePhoneNo } from "../../reducers/userReducer";
+import { onFailureHandShake, onSuccessHandShake, onSuccessValidatePhoneNo, onFailureValidatePhoneNo, } from "../../reducers/userReducer";
+// import { axiosgetCustBookingDetails } from "../axios/GetBookingApi";
 import { axiosHandShakeRequest, axioscreateNewAccountAPI,  } from "../axios/userApis";
 import * as selectors from './selectors';
 
@@ -78,4 +79,15 @@ export function* createNewAccountSaga(request) {
 //         yield put(onFailureValidateOTP(_OTPstatus))
 
 //     yield put(onSuccessValidateOTP(_OTPstatus))
+// }
+
+// export function* getCustBookingDetails() {
+//     let resp = yield call(() => {
+//         return axiosgetCustBookingDetails()
+//     })
+//     if (resp.status == 200) {
+//          put(onSuccessBookingDetails(resp))
+
+//     } else
+//          put(onFailureBookingDetails())
 // }
