@@ -1,5 +1,5 @@
 import { takeEvery } from "redux-saga/effects";
-import { getCustBookingDetails } from "./handlers/CustBookingsaga";
+import { getCustBookingDetails,postvendorQuotesDetails } from "./handlers/CustBookingsaga";
 // import getCustBookingDetails from "./handlers/CustBookingsaga";
 // import { getBookingsConfirm, getBookingsTollDetails, getTollRouteData } from "./handlers/bookingSaga";
 // import { getDashboardSAGA } from "./handlers/dashboardSaga";
@@ -13,6 +13,7 @@ export default function* rootSaga() {
     yield takeEvery(CALL_SAGA.REQUEST_HANDSHAKE, initializeHandShakeSagas);
     yield takeEvery(CALL_SAGA.REQUEST_CREATE_NEW_ACCOUNT, createNewAccountSaga);
     yield takeEvery(CALL_SAGA.REQUEST_GET_CUST_BOOKING_DETAILS, getCustBookingDetails);
+    yield takeEvery(CALL_SAGA.REQUEST_POST_VENDOR_QUOTES_DETAILS, postvendorQuotesDetails);
     // yield takeEvery(CALL_SAGA.REQUEST_VALIDATE_OTP, validateOTPSaga);
     // DASHBOARD
     // yield takeEvery(CALL_SAGA.REQUEST_DASHBOARD_ON_LOAD, getDashboardSAGA);

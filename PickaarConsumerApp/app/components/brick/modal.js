@@ -15,11 +15,13 @@ import moment, { duration } from "moment";
 import CheckBox from "@react-native-community/checkbox";
 import { Toggle } from "react-native-toggle-input";
 import { flat } from "react-native-flags/flags";
-import { MultipleSelectList } from "react-native-dropdown-select-list";
+import { MultipleSelectList, SelectList } from "react-native-dropdown-select-list";
 import RadioGroup from 'react-native-radio-buttons-group';
 import RadioButtonRN from "radio-buttons-react-native";
 import { Icon } from "react-native-gradient-icon";
 import Slider from "@react-native-community/slider";
+import { setBookingParam } from "../../store/reducers/bookingReducer";
+import { value } from "deprecated-react-native-prop-types/DeprecatedTextInputPropTypes";
 
 
 const InforModalContent = ({ closeModal, msg, }) => {
@@ -45,14 +47,15 @@ const InforModalContent = ({ closeModal, msg, }) => {
 }
 
 const CarModalContent = ({ closeModal, modalContent, item },) => {
-
+    const dispatch=useDispatch()
     // console.log("address",item.isSingleWomen)
     // console.log(moment(item.pickUpDate).utc().format('DD/MM/yy'))
 
     const navigation = useNavigation();
-    const openNewroute = () => {
-        console.log("welcomes", item);
-        navigation.navigate('active', { screen: 'quotesBooking' });
+    const openNewroute = (id) => {
+        console.log("welcomes", item._id,id);
+        dispatch(setModalParam({ key: "visibleConfig", value: false }))    
+        navigation.navigate('active', { screen: 'quotesBooking', params: { bookingId: id } });
     }
 
     /***
@@ -239,7 +242,7 @@ const CarModalContent = ({ closeModal, modalContent, item },) => {
                                 <Text style={{ fontFamily: pStyles.fontStyleM, letterSpacing: 1.1, fontSize: 18, color: pStyles.primary }}>Close</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={0.9} onPress={() => { openNewroute() }} >
+                        <TouchableOpacity activeOpacity={0.9} onPress={() => { openNewroute(item._id) }} >
                             <View style={{ height: 40, width: '80%', backgroundColor: pStyles.primary, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderRadius: 5, }}>
                                 <Text style={{ fontFamily: pStyles.fontStyleM, letterSpacing: 1.1, fontSize: 18, color: pStyles.white }}>Proceed</Text>
                             </View>
@@ -355,13 +358,22 @@ const radioButtonsData = [{
 }]
 
 const FilterModal = ({ msg, closeModal }) => {
-
+    const dispatch = useDispatch();
     const [All, setAll] = useState(true);
     const [vehicleType, setVehicleType] = useState(false);
     const [distance, setDistance] = useState(false);
-    const [duration, setDuration] = useState(false);
+     const [duration, setDuration] = useState(false);
     const [tripType, setTripType] = useState(false);
+    // const All  =useSelector((state)=>state.booking.isselectAll);
+    // const VehicleType=useSelector((state)=>state.booking.vehicleType);
+    // const Distance=useSelector((state)=>state.booking.Distance);
+    // const TripType=useSelector((state)=>state.booking.TripType)
 
+    const selectVehicleType = useSelector((state) => state.booking.selectVehicleType);
+    const selectDistance = useSelector((state) => state.booking.selectDistance);
+    // const distance=useSelector((state)=>state.distance);
+    // const tripType=useSelector((state)=>state.tripType)
+    console.log('selectVehicleType1', selectVehicleType, selectDistance)
     //selection the VehicleType
     const [selectVehicle, setSelectVehicle] = useState('');
     const data = [
@@ -371,18 +383,28 @@ const FilterModal = ({ msg, closeModal }) => {
         { key: '4', value: 'MUV' },
         { key: '5', value: 'AUTO' },
     ]
-    console.log("selectVehicle", selectVehicle);
+    // console.log("selectVehicle1", selectVehicle);
     //distance using silder
-    const [selectdistance, setSelectDistance] = useState('100')
-    console.log("selectdistance", selectdistance);
+    const [selectdistance, setSelectDistance] = useState(null)
+    // console.log("selectdistance", selectdistance);
 
     //this using Trip type
-    const [selectTrip, setSelectTrip] = useState('')
+    const [selectTrip, setSelectTrip] = useState(null)
     const trip = [
-        { key: '1', label: 'OneWay' },
-        { key: '1', label: 'return' }
+        { label: 'OneWay' },
+        { label: 'return' }
     ]
-    console.log("selecttrip", selectTrip)
+    console.log("selecttrip data", selectTrip, selectdistance, selectVehicle)
+    const filterData = () => {
+        console.log("selecttrip data....", selectTrip, selectdistance, selectVehicle)
+
+        dispatch(setBookingParam({ key: 'selectVehicleType', value: selectVehicle }));
+        dispatch(setBookingParam({ key: 'selectDistance', value: selectdistance }));
+        dispatch(setBookingParam({ key: 'selectTripType', value: selectTrip }));
+        dispatch(setBookingParam({ key: 'filter', value: true }));
+        dispatch(setModalParam({ key: "visibleConfig", value: false }))
+
+    }
 
     // if(vehicleType==true ||distance==true||duration==true||tripType==true){
     //     setAll=false
@@ -390,18 +412,20 @@ const FilterModal = ({ msg, closeModal }) => {
 
     return (
         <TouchableWithoutFeedback>
+            {/* <ScrollView> */}
             <View style={styles.filtermodal}>
                 <View style={[styles.filtermodalView, {}]}>
                     {/* <ScrollView style={{width:'100%'}}> */}
                     <View style={{ padding: 10, width: '100%' }}>
                         <View style={{ borderBottomWidth: 0.5, }}>
                             <Text style={{ fontSize: 18, flexDirection: 'column', justifyContent: 'center' }}>Filter</Text>
+
                         </View>
                         <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                             <CheckBox
                                 value={vehicleType == true || distance == true || duration == true || tripType == true ? false : true}
+                                // onValueChange={(All)=>dispatch(setBookingParam({key:"isAll",value:All}))}
                                 onValueChange={setAll}
-
                             /><Text style={{ fontSize: 16 }}>All</Text>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
@@ -414,18 +438,24 @@ const FilterModal = ({ msg, closeModal }) => {
                         {
                             vehicleType == true ?
 
-                                <View style={{ flexDirection: 'column', paddingStart: 20 }}>
-                                    <MultipleSelectList
-                                        setSelected={(val) => setSelectVehicle(val)}
-                                        data={data}
-                                        save="value"
-                                        // onSelect={() => console.log(select)}
-                                        // label="Your service District  (Pickup Your costomer)"
-                                        notFoundText="No Data Exists"
-                                    />
+                                <View style={{ flexDirection: 'column', paddingStart: 20, }}>
+                                    <ScrollView>
+                                        <SelectList
+                                            setSelected={(val) => setSelectVehicle(val)}
+                                            // setSelected={(selectVehicle) => dispatch(setBookingParam({ key: 'selectVehicleType', value: selectVehicle }))}
+                                            data={data}
+                                            save="value"
+                                            // onSelect={() => console.log(select)}
+                                            // label="Your service District  (Pickup Your costomer)"
+                                            notFoundText="No Data Exists"
+                                        />
+                                    </ScrollView>
                                 </View>
-                                : null
-                        }
+                                :null
+
+                            }
+                                {/* dispatch(setBookingParam({ key: 'selectVehicleType', value: selectVehicle==0 })) */}
+
                         <View style={{ flexDirection: 'row' }}>
                             <CheckBox
                                 value={distance}
@@ -436,7 +466,7 @@ const FilterModal = ({ msg, closeModal }) => {
                         {
                             distance == true ?
                                 <>
-                                <Text>{selectdistance}</Text>
+                                    <Text>{selectdistance}/Km</Text>
                                     <Slider
                                         style={{ width: 200, height: 40 }}
                                         minimumValue={0}
@@ -444,7 +474,8 @@ const FilterModal = ({ msg, closeModal }) => {
                                         minimumTrackTintColor="tomoto"
                                         maximumTrackTintColor="#000"
                                         value={.5}
-                                        onValueChange={value =>setSelectDistance(parseInt(value*1000)+'/km')}
+                                        onValueChange={value => setSelectDistance(parseInt(value * 1000))}
+                                    // onValueChange={value=>dispatch(setBookingParam({key:'selectDistance',value:selectdistance(parseInt(value*1000)+'/km')}))}
                                     />
                                 </>
                                 : null
@@ -493,15 +524,21 @@ const FilterModal = ({ msg, closeModal }) => {
 
                     </View>
                     {/* </ScrollView> */}
-
-
-                    <TouchableOpacity activeOpacity={0.9} onPress={closeModal} style={{ backgroundColor: pStyles.white, width: '100%', alignItems: 'center', justifyContent: 'flex-end', height: 80 }}>
-                        <View style={{ height: 30, width: '90%', backgroundColor: pStyles.primary, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderRadius: 5 }}>
-                            <Text style={{ fontFamily: pStyles.fontStyleM, letterSpacing: 1.1, fontSize: 16, color: pStyles.white }}>Apply</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <View style={{ flexDirection: 'row' }}>
+                        <TouchableOpacity activeOpacity={0.9} onPress={closeModal} style={{ backgroundColor: pStyles.white, width: '50%', alignItems: 'center', justifyContent: 'flex-end', height: 80 }}>
+                            <View style={{ height: 30, width: '90%', backgroundColor: pStyles.gray, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderRadius: 5 }}>
+                                <Text style={{ fontFamily: pStyles.fontStyleM, letterSpacing: 1.1, fontSize: 16, color: pStyles.white }}>close</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.9} onPress={() => filterData()} style={{ backgroundColor: pStyles.white, width: '50%', alignItems: 'center', justifyContent: 'flex-end', height: 80 }}>
+                            <View style={{ height: 30, width: '90%', backgroundColor: pStyles.primary, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', borderRadius: 5 }}>
+                                <Text style={{ fontFamily: pStyles.fontStyleM, letterSpacing: 1.1, fontSize: 16, color: pStyles.white }}>Apply</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
+            {/* </ScrollView> */}
         </TouchableWithoutFeedback>
     )
 }
@@ -658,7 +695,8 @@ const styles = StyleSheet.create({
 
     }, addressTxtValue: {
         fontSize: 12
-    }, item: {
+    },
+    item: {
         height: 150,
         overflow: 'hidden',
         width: DEVICE_WIDTH * 0.9,
@@ -682,7 +720,7 @@ const styles = StyleSheet.create({
         height: DEVICE_HEIGHT,
         alignItems: 'flex-end',
         justifyContent: 'flex-start',
-        paddingTop: 100
+        paddingTop: 70
     },
     filtermodalView: {
         borderRadius: 20,
@@ -691,6 +729,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'flex-start',
         paddingStart: 20,
+        paddingBottom: 20,
+        paddingTop: 20,
         backgroundColor: pStyles.white,
         shadowColor: '#000',
         shadowOffset: {

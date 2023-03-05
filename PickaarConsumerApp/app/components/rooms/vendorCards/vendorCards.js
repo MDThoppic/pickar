@@ -295,7 +295,7 @@ export const RenderVendorCardJSX = ({ item }) => {
     // console.log(item.save)
     return (
         // <View key={item.quoteId} style={[styles.item]}>
-        <View style={[styles.item]} key={item.bookingId}>
+        <View style={[styles.item]} >
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                 {/* <FirstColBlockJSX quotedAmt={item.quotedAmtByKM} save={item.save} isNegotiable={item.isNegotiable} /> */}
                 {/* <FirstColBlockJSX /> */}

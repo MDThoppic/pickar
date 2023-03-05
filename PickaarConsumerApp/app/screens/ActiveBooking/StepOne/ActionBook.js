@@ -10,6 +10,16 @@ import { themeColors } from '../../../utils/constant';
 function ActiveBook() {
   const district = useSelector((state) => state.booking.district);
   const bookingList = useSelector((state) => state.booking.bookingList)
+  const All = useSelector((state) => state.booking.isselectAll);
+  const selectVehicleType = useSelector((state) => state.booking.selectVehicleType);
+  const selectDistance = useSelector((state) => state.booking.selectDistance);
+  const selectTripType = useSelector((state) => state.booking.selectTripType)
+  const trip = selectTripType.label== 'return' ? 2 : 1
+  const filter = useSelector((state) => state.booking.filter)
+
+  const filterQuots = bookingList?.filter(bookingList => bookingList.vehicleType == selectVehicleType || bookingList.tripType == '2'||300>=selectDistance)
+  console.log("actionBooking", All, selectVehicleType, selectDistance, selectTripType)
+  console.log("eeeee", bookingList.tripType);
   // console.log("active", bookingList.length)
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,6 +31,14 @@ function ActiveBook() {
     }
 
   }, [district])
+
+
+
+  // useEffect(()=>{
+  // console.log("actionBooking",All,selectVehicleType,selectDistance,selectTripType)
+
+  // },[filter])
+
   return (
     <View style={styles.contentContainer}>
 
@@ -28,11 +46,11 @@ function ActiveBook() {
 
         {/* bookingList length to get validation process */}
         {
-          
+
           bookingList?.length > 0 ?
-          bookingList.map((item,index)=><RenderVendorCardJSX key={index} item={item} />)
-          :
-          <Text>Not available the Booking</Text>
+            bookingList.map((item, index) => <RenderVendorCardJSX key={index} item={item} />)
+            :
+            <Text>Not available the Booking</Text>
         }
       </View>
 

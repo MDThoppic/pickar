@@ -8,9 +8,9 @@ import date from 'date-and-time';
 export const SelectedBookingJSX = ({ item, from }) => {
     const isFromDetail = from === 'DETAIL' ? true : false;
     if (isFromDetail) {
-        const bookingList = useSelector((state) => state.quotes.bookingList)
-        const selectedIndex = useSelector((state) => state.quotes.selectedIndex)
-        item = bookingList[selectedIndex];
+        const bookingList = useSelector((state) => state.booking.bookingList)
+        const selectedIndex = useSelector((state) => state.booking.selectedIndex)
+        // item = bookingList[selectedIndex];
         // console.log(JSON.stringify(item))
     }
 

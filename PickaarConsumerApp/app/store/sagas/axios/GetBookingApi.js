@@ -23,3 +23,19 @@ export const axiosgetCustBookingDetails = async (district) => {
         return false
     }
 };
+
+export const axiospostvendorQuotesDetails = async (bookingId) => {
+    console.log(BOOKING_END_URL)
+    try {
+        const quteObj = await axios.post(
+            BOOKING_END_URL + 'booking/bookirnglist/'+bookingId,
+            // 'http://192.168.132.50:4002/api/booking/bookinglist',
+            { district: JSON.parse(district)  }
+        );
+        // console.log("Api result",userObj.data)
+        return quteObj;        
+    } catch (e) {
+        console.log("Api test error", JSON.stringify(e));
+        return false
+    }
+};
